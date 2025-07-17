@@ -38,3 +38,21 @@
 [submodule "components/connect-app"]
 	path = components/connect-app
 	url = https://github.com/tiation/tiation-rigger-connect-app.git
+[submodule "components/jobs-app"]
+	path = components/jobs-app
+	url = https://github.com/tiation/tiation-rigger-jobs-app.git
+[submodule "components/mobile-app"]
+	path = components/mobile-app
+	url = https://github.com/tiation/tiation-rigger-mobile-app.git
+[submodule "components/infrastructure"]
+	path = components/infrastructure
+	url = https://github.com/tiation/tiation-rigger-infrastructure.git
+[submodule "components/metrics-dashboard"]
+	path = components/metrics-dashboard
+	url = https://github.com/tiation/tiation-rigger-metrics-dashboard.git
+[submodule "components/shared-libraries"]
+	path = components/shared-libraries
+	url = https://github.com/tiation/tiation-rigger-shared-libraries.git
+[submodule "components/workspace-docs"]
+	path = components/workspace-docs
+	url = https://github.com/tiation/tiation-rigger-workspace-docs.git
