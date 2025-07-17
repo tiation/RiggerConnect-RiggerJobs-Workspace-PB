@@ -1,0 +1,73 @@
+title: RiggerConnect-RiggerJobs-Workspace
+description: Enterprise-Grade Job Matching Platform for Construction Industry
+author: RiggerConnect Team
+email: contact@riggerconnect.com
+url: https://tiation.github.io/RiggerConnect-RiggerJobs-Workspace-PB
+
+# GitHub Pages settings
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Navigation
+navigation:
+  - name: Home
+    link: /
+  - name: Documentation
+    link: /docs/
+  - name: API Reference
+    link: /docs/api/
+  - name: Architecture
+    link: /docs/architecture/
+  - name: Contributing
+    link: /CONTRIBUTING.html
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Exclude from processing
+exclude:
+  - node_modules/
+  - .git/
+  - .gitignore
+  - package.json
+  - package-lock.json
+  - README.md
+  - LICENSE
+  - .env*
+  - scripts/
+  - Tests/
+  - AutomationServer/
+  - RiggerConnectApp/
+  - RiggerJobsApp/
+  - Infrastructure/
+
+# Include specific files
+include:
+  - _pages/
+  - assets/
+  - docs/
+
+# SEO settings
+twitter:
+  username: riggerconnect
+  card: summary_large_image
+
+facebook:
+  app_id: 1234567890
+  publisher: riggerconnect
+
+logo: /assets/logos/riggerconnect-logo.svg
+
+social:
+  name: RiggerConnect
+  links:
+    - https://twitter.com/riggerconnect
+    - https://github.com/tiation/RiggerConnect-RiggerJobs-Workspace-PB
+    - https://linkedin.com/company/riggerconnect
