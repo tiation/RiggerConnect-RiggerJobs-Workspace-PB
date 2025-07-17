@@ -1,3 +1,34 @@
-# RiggerConnect Component Submodules
+# Tiation Rigger Component Submodules
 # This file tracks the separate repositories for each component
 
+[submodule "tiation-rigger-automation-server"]
+	path = components/automation-server
+	url = https://github.com/tiation/tiation-rigger-automation-server.git
+
+[submodule "tiation-rigger-connect-app"]
+	path = components/connect-app
+	url = https://github.com/tiation/tiation-rigger-connect-app.git
+
+[submodule "tiation-rigger-jobs-app"]
+	path = components/jobs-app
+	url = https://github.com/tiation/tiation-rigger-jobs-app.git
+
+[submodule "tiation-rigger-mobile-app"]
+	path = components/mobile-app
+	url = https://github.com/tiation/tiation-rigger-mobile-app.git
+
+[submodule "tiation-rigger-infrastructure"]
+	path = components/infrastructure
+	url = https://github.com/tiation/tiation-rigger-infrastructure.git
+
+[submodule "tiation-rigger-metrics-dashboard"]
+	path = components/metrics-dashboard
+	url = https://github.com/tiation/tiation-rigger-metrics-dashboard.git
+
+[submodule "tiation-rigger-shared-libraries"]
+	path = components/shared-libraries
+	url = https://github.com/tiation/tiation-rigger-shared-libraries.git
+
+[submodule "tiation-rigger-workspace-docs"]
+	path = components/workspace-docs
+	url = https://github.com/tiation/tiation-rigger-workspace-docs.git
