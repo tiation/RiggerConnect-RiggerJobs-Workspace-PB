@@ -5,7 +5,7 @@ email: contact@riggerconnect.com
 url: https://tiation.github.io/RiggerConnect-RiggerJobs-Workspace-PB
 
 # GitHub Pages settings
-theme: minima
+remote_theme: tiation/tiation-github-pages-theme
 plugins:
   - jekyll-feed
   - jekyll-sitemap
