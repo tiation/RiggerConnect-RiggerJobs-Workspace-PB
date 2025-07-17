@@ -1,14 +1,32 @@
-# API Reference
+# RiggerConnect API Documentation
 
-## Overview
+<div align="center">
+  <img src="../../assets/logos/riggerconnect-logo.svg" alt="RiggerConnect Logo" width="200"/>
+  <h2>Enterprise-Grade API Documentation</h2>
+  <p><strong>Version 1.0.0</strong></p>
+</div>
 
-The RiggerConnect API provides a comprehensive set of endpoints for managing jobs, workers, payments, and automation in the construction industry job matching platform.
+---
 
-## Base URL
+## 📋 Overview
 
-- **Production**: `https://api.riggerconnect.com/v1`
-- **Staging**: `https://staging-api.riggerconnect.com/v1`
-- **Development**: `http://localhost:3000/v1`
+The RiggerConnect API provides a comprehensive set of RESTful endpoints for managing jobs, workers, payments, and automation in the construction industry job matching platform. Built with enterprise-grade security, scalability, and performance in mind.
+
+### Key Features
+- **RESTful Architecture**: Clean, predictable API design
+- **JWT Authentication**: Secure token-based authentication
+- **Real-time Communication**: WebSocket support for live updates
+- **Comprehensive Validation**: Input validation and sanitization
+- **Rate Limiting**: Protection against abuse
+- **OpenAPI 3.0**: Full specification available
+
+## 🌐 Base URLs
+
+| Environment | Base URL | Purpose |
+|-------------|----------|----------|
+| **Production** | `https://api.riggerconnect.com/v1` | Live production environment |
+| **Staging** | `https://staging-api.riggerconnect.com/v1` | Pre-production testing |
+| **Development** | `http://localhost:3000/v1` | Local development |
 
 ## Authentication
 
