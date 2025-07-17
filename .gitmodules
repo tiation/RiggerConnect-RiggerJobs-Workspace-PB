@@ -32,3 +32,9 @@
 [submodule "tiation-rigger-workspace-docs"]
 	path = components/workspace-docs
 	url = https://github.com/tiation/tiation-rigger-workspace-docs.git
+[submodule "components/automation-server"]
+	path = components/automation-server
+	url = https://github.com/tiation/tiation-rigger-automation-server.git
+[submodule "components/connect-app"]
+	path = components/connect-app
+	url = https://github.com/tiation/tiation-rigger-connect-app.git
