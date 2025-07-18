@@ -1,0 +1,221 @@
+version: '3.8'
+
+services:
+  # Database Services
+  postgres:
+    image: postgres:15-alpine
+    container_name: tiation-postgres
+    environment:
+      POSTGRES_DB: tiation_rigger
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init:/docker-entrypoint-initdb.d
+    networks:
+      - tiation-network
+
+  mongodb:
+    image: mongo:7.0
+    container_name: tiation-mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: tiation_rigger
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./database/mongo-init:/docker-entrypoint-initdb.d
+    networks:
+      - tiation-network
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: tiation-redis
+    command: redis-server --appendonly yes --requirepass password
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - tiation-network
+
+  # Backend Services
+  automation-server:
+    build:
+      context: ../tiation-rigger-automation-server
+      dockerfile: Dockerfile
+    container_name: tiation-automation-server
+    environment:
+      NODE_ENV: development
+      PORT: 3001
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: tiation_rigger
+      DB_USER: postgres
+      DB_PASSWORD: password
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: password
+      MONGODB_URI: mongodb://admin:password@mongodb:27017/tiation_rigger?authSource=admin
+      JWT_SECRET: development_jwt_secret_key_very_long_and_secure
+    ports:
+      - "3001:3001"
+    depends_on:
+      - postgres
+      - mongodb
+      - redis
+    volumes:
+      - ../tiation-rigger-automation-server:/app
+      - /app/node_modules
+    networks:
+      - tiation-network
+    command: npm run dev
+
+  connect-api:
+    build:
+      context: ../tiation-rigger-connect-api
+      dockerfile: Dockerfile
+    container_name: tiation-connect-api
+    environment:
+      NODE_ENV: development
+      PORT: 3002
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: tiation_rigger
+      DB_USER: postgres
+      DB_PASSWORD: password
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: password
+      MONGODB_URI: mongodb://admin:password@mongodb:27017/tiation_rigger?authSource=admin
+      JWT_SECRET: development_jwt_secret_key_very_long_and_secure
+    ports:
+      - "3002:3002"
+    depends_on:
+      - postgres
+      - mongodb
+      - redis
+    volumes:
+      - ../tiation-rigger-connect-api:/app
+      - /app/node_modules
+    networks:
+      - tiation-network
+    command: npm run dev
+
+  # Frontend Services
+  connect-app:
+    build:
+      context: ../tiation-rigger-connect-app
+      dockerfile: Dockerfile
+    container_name: tiation-connect-app
+    environment:
+      NODE_ENV: development
+      PORT: 3003
+      REACT_APP_API_URL: http://localhost:3002/api
+      REACT_APP_AUTOMATION_SERVER_URL: http://localhost:3001/api
+    ports:
+      - "3003:3003"
+    depends_on:
+      - automation-server
+      - connect-api
+    volumes:
+      - ../tiation-rigger-connect-app:/app
+      - /app/node_modules
+    networks:
+      - tiation-network
+    command: npm run dev
+
+  jobs-app:
+    build:
+      context: ../tiation-rigger-jobs-app
+      dockerfile: Dockerfile
+    container_name: tiation-jobs-app
+    environment:
+      NODE_ENV: development
+      PORT: 3004
+      REACT_APP_API_URL: http://localhost:3002/api
+      REACT_APP_AUTOMATION_SERVER_URL: http://localhost:3001/api
+    ports:
+      - "3004:3004"
+    depends_on:
+      - automation-server
+      - connect-api
+    volumes:
+      - ../tiation-rigger-jobs-app:/app
+      - /app/node_modules
+    networks:
+      - tiation-network
+    command: npm run dev
+
+  # Analytics & Monitoring
+  metrics-dashboard:
+    build:
+      context: ../tiation-rigger-metrics-dashboard
+      dockerfile: Dockerfile
+    container_name: tiation-metrics-dashboard
+    environment:
+      NODE_ENV: development
+      PORT: 3005
+      REACT_APP_API_URL: http://localhost:3002/api
+      REACT_APP_AUTOMATION_SERVER_URL: http://localhost:3001/api
+    ports:
+      - "3005:3005"
+    depends_on:
+      - automation-server
+      - connect-api
+    volumes:
+      - ../tiation-rigger-metrics-dashboard:/app
+      - /app/node_modules
+    networks:
+      - tiation-network
+    command: npm run dev
+
+  # Supporting Services
+  nginx:
+    image: nginx:alpine
+    container_name: tiation-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+    depends_on:
+      - automation-server
+      - connect-api
+      - connect-app
+      - jobs-app
+      - metrics-dashboard
+    networks:
+      - tiation-network
+
+  # Documentation
+  docs:
+    build:
+      context: ../tiation-rigger-workspace-docs
+      dockerfile: Dockerfile
+    container_name: tiation-docs
+    environment:
+      NODE_ENV: development
+      PORT: 3006
+    ports:
+      - "3006:3006"
+    volumes:
+      - ../tiation-rigger-workspace-docs:/app
+      - /app/node_modules
+    networks:
+      - tiation-network
+    command: npm run dev
+
+volumes:
+  postgres_data:
+  mongodb_data:
+  redis_data:
+
+networks:
+  tiation-network:
+    driver: bridge

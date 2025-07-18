@@ -1,28 +1,54 @@
 module.exports = {
+  // Basic formatting
   semi: true,
   trailingComma: 'es5',
   singleQuote: true,
-  printWidth: 100,
+  doubleQuote: false,
+  
+  // Indentation
   tabWidth: 2,
   useTabs: false,
-  quoteProps: 'as-needed',
+  
+  // Line length
+  printWidth: 100,
+  
+  // Object formatting
   bracketSpacing: true,
-  arrowParens: 'avoid',
-  endOfLine: 'lf',
+  objectCurlySpacing: true,
+  
+  // Array formatting
   bracketSameLine: false,
-  embeddedLanguageFormatting: 'auto',
-  htmlWhitespaceSensitivity: 'css',
-  insertPragma: false,
-  jsxBracketSameLine: false,
+  arrayBracketSpacing: false,
+  
+  // Arrow functions
+  arrowParens: 'avoid',
+  
+  // JSX formatting
   jsxSingleQuote: true,
-  proseWrap: 'preserve',
-  requirePragma: false,
+  jsxBracketSameLine: false,
+  
+  // HTML formatting
+  htmlWhitespaceSensitivity: 'css',
+  
+  // End of line
+  endOfLine: 'lf',
+  
+  // Embedded language formatting
+  embeddedLanguageFormatting: 'auto',
+  
+  // Quote props
+  quoteProps: 'as-needed',
+  
+  // Vue formatting
   vueIndentScriptAndStyle: false,
+  
+  // File overrides
   overrides: [
     {
       files: '*.json',
       options: {
         printWidth: 80,
+        tabWidth: 2,
       },
     },
     {
@@ -30,6 +56,21 @@ module.exports = {
       options: {
         printWidth: 80,
         proseWrap: 'always',
+        tabWidth: 2,
+      },
+    },
+    {
+      files: '*.yml',
+      options: {
+        tabWidth: 2,
+        singleQuote: false,
+      },
+    },
+    {
+      files: '*.yaml',
+      options: {
+        tabWidth: 2,
+        singleQuote: false,
       },
     },
   ],
