@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiation Rigger Workspace - Enterprise Mining & Construction Platform</title>
+    <meta name="description" content="Enterprise-grade rigger workspace platform for Western Australia's mining and construction industry. AI-powered job matching, document management, and comprehensive analytics.">
+    <meta name="keywords" content="rigger, mining, construction, Western Australia, job matching, enterprise, SaaS, mobile app">
+    <meta name="author" content="Tiation">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tiaastor.github.io/tiation-rigger-workspace/">
+    <meta property="og:title" content="Tiation Rigger Workspace - Enterprise Mining Platform">
+    <meta property="og:description" content="Enterprise-grade rigger workspace platform for Western Australia's mining and construction industry.">
+    <meta property="og:image" content="https://tiaastor.github.io/tiation-rigger-workspace/assets/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tiaastor.github.io/tiation-rigger-workspace/">
+    <meta property="twitter:title" content="Tiation Rigger Workspace - Enterprise Mining Platform">
+    <meta property="twitter:description" content="Enterprise-grade rigger workspace platform for Western Australia's mining and construction industry.">
+    <meta property="twitter:image" content="https://tiaastor.github.io/tiation-rigger-workspace/assets/twitter-image.png">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'gradient-x': 'gradient-x 15s ease infinite',
+                        'gradient-y': 'gradient-y 15s ease infinite',
+                        'gradient-xy': 'gradient-xy 15s ease infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        'gradient-y': {
+                            '0%, 100%': {
+                                'background-size': '400% 400%',
+                                'background-position': 'center top'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'center center'
+                            }
+                        },
+                        'gradient-x': {
+                            '0%, 100%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'left center'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'right center'
+                            }
+                        },
+                        'gradient-xy': {
+                            '0%, 100%': {
+                                'background-size': '400% 400%',
+                                'background-position': 'left center'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'right center'
+                            }
+                        },
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Styles -->
+    <style>
+        .bg-grid-pattern {
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .neon-border {
+            box-shadow: 
+                0 0 5px rgba(0, 255, 255, 0.5),
+                0 0 10px rgba(0, 255, 255, 0.3),
+                0 0 15px rgba(0, 255, 255, 0.2),
+                inset 0 0 5px rgba(0, 255, 255, 0.1);
+        }
+        
+        .text-glow {
+            text-shadow: 
+                0 0 5px rgba(0, 255, 255, 0.5),
+                0 0 10px rgba(0, 255, 255, 0.3),
+                0 0 15px rgba(0, 255, 255, 0.2);
+        }
+    </style>
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+</head>
+
+<body class="bg-black text-white font-sans antialiased overflow-x-hidden">
+    <!-- Background Effects -->
+    <div class="fixed inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800 -z-50"></div>
+    <div class="fixed inset-0 bg-grid-pattern opacity-20 -z-40"></div>
+    <div class="fixed inset-0 bg-gradient-to-r from-cyan-500/10 via-transparent to-pink-500/10 animate-gradient-x -z-30"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-cyan-400 to-pink-400 rounded-xl flex items-center justify-center">
+                        <span class="text-black font-bold text-xl">⚡</span>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold bg-gradient-to-r from-cyan-400 to-pink-400 bg-clip-text text-transparent">
+                            Rigger Workspace
+                        </h1>
+                        <p class="text-xs text-gray-400">Enterprise Platform</p>
+                    </div>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-gray-300 hover:text-cyan-400 transition-colors">Features</a>
+                    <a href="#demo" class="text-gray-300 hover:text-cyan-400 transition-colors">Demo</a>
+                    <a href="#pricing" class="text-gray-300 hover:text-cyan-400 transition-colors">Pricing</a>
+                    <a href="#architecture" class="text-gray-300 hover:text-cyan-400 transition-colors">Architecture</a>
+                    <a href="https://github.com/TiaAstor/tiation-rigger-workspace" class="text-gray-300 hover:text-cyan-400 transition-colors">GitHub</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <a href="#pricing" class="px-6 py-2 bg-gradient-to-r from-cyan-400 to-pink-400 text-black rounded-xl font-semibold hover:from-cyan-300 hover:to-pink-300 transition-all duration-300 neon-border">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-5xl mx-auto">
+                <div class="inline-flex items-center space-x-2 bg-gradient-to-r from-cyan-500/20 to-pink-500/20 px-4 py-2 rounded-full glass mb-8">
+                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                    <span class="text-sm text-gray-300">Enterprise-Grade • Production Ready • $500K+ Revenue Potential</span>
+                </div>
+                
+                <h1 class="text-6xl md:text-8xl font-black mb-6 leading-tight">
+                    <span class="bg-gradient-to-r from-cyan-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-gradient-x text-glow">
+                        Rigger Workspace
+                    </span>
+                </h1>
+                
+                <p class="text-2xl md:text-3xl text-gray-300 mb-8 leading-relaxed">
+                    Enterprise mining & construction platform for 
+                    <span class="bg-gradient-to-r from-cyan-400 to-pink-400 bg-clip-text text-transparent font-semibold">
+                        Western Australia
+                    </span>
+                </p>
+                
+                <p class="text-xl text-gray-400 mb-12 max-w-3xl mx-auto">
+                    AI-powered job matching, comprehensive document management, and advanced analytics 
+                    designed specifically for riggers in the mining and construction industry.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+                    <a href="#pricing" class="px-8 py-4 bg-gradient-to-r from-cyan-400 to-pink-400 text-black rounded-2xl font-bold text-lg hover:from-cyan-300 hover:to-pink-300 transition-all duration-300 neon-border shadow-lg">
+                        Start Free Trial
+                    </a>
+                    <a href="#demo" class="px-8 py-4 glass rounded-2xl font-semibold text-lg hover:bg-white/10 transition-all duration-300 border border-gray-600 hover:border-cyan-400">
+                        View Live Demo
+                    </a>
+                    <a href="https://github.com/TiaAstor/tiation-rigger-workspace" class="px-8 py-4 bg-gray-800 rounded-2xl font-semibold text-lg hover:bg-gray-700 transition-all duration-300 border border-gray-600">
+                        View on GitHub
+                    </a>
+                </div>
+
+                <!-- Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+                    <div class="glass rounded-2xl p-6 text-center">
+                        <div class="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-pink-400 bg-clip-text text-transparent">$500K+</div>
+                        <div class="text-sm text-gray-400">Annual Revenue Potential</div>
+                    </div>
+                    <div class="glass rounded-2xl p-6 text-center">
+                        <div class="text-3xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">98%</div>
+                        <div class="text-sm text-gray-400">Job Match Accuracy</div>
+                    </div>
+                    <div class="glass rounded-2xl p-6 text-center">
+                        <div class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">24/7</div>
+                        <div class="text-sm text-gray-400">Enterprise Support</div>
+                    </div>
+                    <div class="glass rounded-2xl p-6 text-center">
+                        <div class="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-pink-400 bg-clip-text text-transparent">SOC 2</div>
+                        <div class="text-sm text-gray-400">Security Compliant</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Elements -->
+        <div class="absolute top-20 left-10 w-20 h-20 bg-gradient-to-r from-cyan-400/20 to-pink-400/20 rounded-full blur-xl animate-float"></div>
+        <div class="absolute bottom-20 right-10 w-32 h-32 bg-gradient-to-r from-pink-400/20 to-purple-400/20 rounded-full blur-2xl animate-float" style="animation-delay: -2s;"></div>
+        <div class="absolute top-1/2 left-1/4 w-16 h-16 bg-gradient-to-r from-purple-400/20 to-cyan-400/20 rounded-full blur-lg animate-float" style="animation-delay: -4s;"></div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-pink-400 bg-clip-text text-transparent">
+                    Enterprise Features
+                </h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Comprehensive platform designed for the unique needs of Western Australia's mining and construction industry
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 group">
+                    <div class="w-16 h-16 bg-gradient-to-r from-cyan-400 to-pink-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <span class="text-2xl">🤖</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">AI-Powered Job Matching</h3>
+                    <p class="text-gray-300">
+                        Advanced machine learning algorithms match riggers with perfect opportunities based on skills, experience, and location preferences.
+                    </p>
+                </div>
+
+                <div class="glass rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 group">
+                    <div class="w-16 h-16 bg-gradient-to-r from-pink-400 to-purple-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <span class="text-2xl">📱</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Mobile-First Design</h3>
+                    <p class="text-gray-300">
+                        Native iOS and Android apps with offline capabilities, ensuring riggers can access opportunities anywhere, anytime.
+                    </p>
+                </div>
+
+                <div class="glass rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 group">
+                    <div class="w-16 h-16 bg-gradient-to-r from-purple-400 to-cyan-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <span class="text-2xl">📊</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Advanced Analytics</h3>
+                    <p class="text-gray-300">
+                        Comprehensive insights into job market trends, application success rates, and career progression opportunities.
+                    </p>
+                </div>
+
+                <div class="glass rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 group">
+                    <div class="w-16 h-16 bg-gradient-to-r from-cyan-400 to-pink-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <span class="text-2xl">🛡️</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Document Management</h3>
+                    <p class="text-gray-300">
+                        Secure storage and verification of certifications, safety training records, and compliance documents with automatic expiry alerts.
+                    </p>
+                </div>
+
+                <div class="glass rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 group">
+                    <div class="w-16 h-16 bg-gradient-to-r from-pink-400 to-purple-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <span class="text-2xl">💳</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Integrated Payments</h3>
+                    <p class="text-gray-300">
+                        Seamless Stripe integration for subscription management, billing, and enterprise payment processing.
+                    </p>
+                </div>
+
+                <div class="glass rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 group">
+                    <div class="w-16 h-16 bg-gradient-to-r from-purple-400 to-cyan-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <span class="text-2xl">🔒</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Enterprise Security</h3>
+                    <p class="text-gray-300">
+                        SOC 2 Type II compliant with end-to-end encryption, multi-factor authentication, and comprehensive audit logging.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Demo Section -->
+    <section id="demo" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-pink-400 bg-clip-text text-transparent">
+                    Experience the Platform
+                </h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Interactive demonstrations showcasing key features and capabilities
+                </p>
+            </div>
+
+            <div class="max-w-6xl mx-auto">
+                <div class="glass rounded-3xl p-8">
+                    <div class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl flex items-center justify-center relative overflow-hidden">
+                        <!-- Demo Preview -->
+                        <div class="text-center">
+                            <div class="w-24 h-24 bg-gradient-to-r from-cyan-400 to-pink-400 rounded-full flex items-center justify-center mb-6 mx-auto">
+                                <span class="text-4xl">▶️</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-4">Interactive Demo</h3>
+                            <p class="text-gray-300 mb-6">Experience our AI-powered job matching system</p>
+                            <button class="px-8 py-3 bg-gradient-to-r from-cyan-400 to-pink-400 text-black rounded-xl font-semibold hover:from-cyan-300 hover:to-pink-300 transition-all duration-300">
+                                Launch Demo
+                            </button>
+                        </div>
+
+                        <!-- Background Animation -->
+                        <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-transparent to-pink-500/10 animate-gradient-x"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section id="architecture" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-pink-400 bg-clip-text text-transparent">
+                    Enterprise Architecture
+                </h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Scalable, secure, and reliable infrastructure designed for enterprise workloads
+                </p>
+            </div>
+
+            <div class="max-w-6xl mx-auto">
+                <div class="glass rounded-3xl p-8">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-6">System Components</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-4 h-4 bg-cyan-400 rounded-full"></div>
+                                    <span class="text-gray-300">React Native Mobile Apps</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-4 h-4 bg-pink-400 rounded-full"></div>
+                                    <span class="text-gray-300">API Gateway & Load Balancer</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-4 h-4 bg-purple-400 rounded-full"></div>
+                                    <span class="text-gray-300">Microservices Architecture</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-4 h-4 bg-cyan-400 rounded-full"></div>
+                                    <span class="text-gray-300">PostgreSQL Database</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-4 h-4 bg-pink-400 rounded-full"></div>
+                                    <span class="text-gray-300">Redis Cache Layer</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-4 h-4 bg-purple-400 rounded-full"></div>
+                                    <span class="text-gray-300">AWS S3 File Storage</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="aspect-square bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl flex items-center justify-center">
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-gradient-to-r from-cyan-400 to-pink-400 rounded-2xl flex items-center justify-center mb-4 mx-auto">
+                                    <span class="text-2xl">🏗️</span>
+                                </div>
+                                <p class="text-gray-300 text-sm">Architecture Diagram</p>
+                                <p class="text-xs text-gray-500 mt-2">Interactive diagram available in documentation</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-pink-400 bg-clip-text text-transparent">
+                    Choose Your Plan
+                </h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Scale your rigging career with enterprise-grade tools
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Starter Plan -->
+                <div class="glass rounded-2xl p-8 border border-gray-600">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-white mb-2">Starter</h3>
+                        <p class="text-gray-400 mb-6">Perfect for individual riggers</p>
+                        <div class="flex items-baseline justify-center mb-6">
+                            <span class="text-5xl font-bold text-white">$29</span>
+                            <span class="text-gray-400 ml-2">/month</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-cyan-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-300">Up to 5 job applications</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-cyan-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-300">Basic profile management</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-cyan-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-300">Mobile app access</span>
+                        </li>
+                    </ul>
+                    <button class="w-full py-4 bg-gray-700 text-white rounded-xl font-semibold hover:bg-gray-600 transition-colors">
+                        Get Started
+                    </button>
+                </div>
+
+                <!-- Professional Plan -->
+                <div class="glass rounded-2xl p-8 border-2 border-cyan-400 relative scale-105">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                        <span class="bg-gradient-to-r from-cyan-400 to-pink-400 text-black px-6 py-2 rounded-full text-sm font-bold">
+                            MOST POPULAR
+                        </span>
+                    </div>
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-white mb-2">Professional</h3>
+                        <p class="text-gray-400 mb-6">Ideal for experienced riggers</p>
+                        <div class="flex items-baseline justify-center mb-6">
+                            <span class="text-5xl font-bold text-white">$89</span>
+                            <span class="text-gray-400 ml-2">/month</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-cyan-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-300">Unlimited job applications</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-cyan-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-300">Advanced analytics</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-cyan-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-300">Priority support</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-cyan-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-300">Document management</span>
+                        </li>
+                    </ul>
+                    <button class="w-full py-4 bg-gradient-to-r from-cyan-400 to-pink-400 text-black rounded-xl font-semibold hover:from-cyan-300 hover:to-pink-300 transition-all duration-300">
+                        Get Started with Professional
+                    </button>
+                    <p class="text-center text-sm text-gray-400 mt-4">
+                        ⚡ 30-day free trial included
+                    </p>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="glass rounded-2xl p-8 border border-gray-600">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-white mb-2">Enterprise</h3>
+                        <p class="text-gray-400 mb-6">For companies and organizations</p>
+                        <div class="flex items-baseline justify-center mb-6">
+                            <span class="text-5xl font-bold text-white">$299</span>
+                            <span class="text-gray-400 ml-2">/month</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-cyan-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-300">Everything in Professional</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-cyan-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-300">Team management</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-cyan-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-300">Custom integrations</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-cyan-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-300">Dedicated account manager</span>
+                        </li>
+                    </ul>
+                    <button class="w-full py-4 bg-gray-700 text-white rounded-xl font-semibold hover:bg-gray-600 transition-colors">
+                        Contact Sales
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 border-t border-gray-800 relative">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-10 h-10 bg-gradient-to-r from-cyan-400 to-pink-400 rounded-xl flex items-center justify-center">
+                            <span class="text-black font-bold text-xl">⚡</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold bg-gradient-to-r from-cyan-400 to-pink-400 bg-clip-text text-transparent">
+                                Rigger Workspace
+                            </h3>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        Enterprise-grade platform for Western Australia's mining and construction industry.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://github.com/TiaAstor/tiation-rigger-workspace" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors">
+                            <span class="text-xl">🐙</span>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors">
+                            <span class="text-xl">💼</span>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors">
+                            <span class="text-xl">🐦</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-white mb-6">Platform</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#features" class="hover:text-cyan-400 transition-colors">Features</a></li>
+                        <li><a href="#pricing" class="hover:text-cyan-400 transition-colors">Pricing</a></li>
+                        <li><a href="#demo" class="hover:text-cyan-400 transition-colors">Demo</a></li>
+                        <li><a href="#architecture" class="hover:text-cyan-400 transition-colors">Architecture</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-white mb-6">Resources</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Documentation</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">API Reference</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Support</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-white mb-6">Company</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">About</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Privacy</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 mb-4 md:mb-0">
+                        © 2024 Tiation. All rights reserved. Built for Western Australia's mining industry.
+                    </p>
+                    <div class="flex items-center space-x-6 text-sm text-gray-500">
+                        <span>🔒 Secure payments via Stripe</span>
+                        <span>🛡️ Enterprise-grade security</span>
+                        <span>🇦🇺 Australian business compliant</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Smooth Scrolling Script -->
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu functionality (if needed)
+        // Add any additional JavaScript functionality here
+    </script>
+</body>
+</html>
