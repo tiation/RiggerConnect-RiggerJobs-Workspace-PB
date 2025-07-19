@@ -316,3 +316,26 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
     <img src="https://img.shields.io/github/stars/TiaAstor/tiation-rigger-workspace?style=social&label=Star&maxAge=2592000" alt="GitHub Stars">
   </a>
 </div>
+
+## 🔗 Related Projects & Ecosystem
+
+### Core Components
+- 🏗️ [**Rigger Infrastructure**](https://github.com/tiation/tiation-rigger-infrastructure) - Infrastructure & deployment configs
+- 📱 [**Rigger Mobile App**](https://github.com/tiation/tiation-rigger-mobile-app) - React Native mobile application  
+- 🔗 [**Rigger Connect API**](https://github.com/tiation/tiation-rigger-connect-api) - Backend API services
+- 💼 [**Rigger Jobs App**](https://github.com/tiation/tiation-rigger-jobs-app) - Job management application
+- 🤖 [**Rigger Automation Server**](https://github.com/tiation/tiation-rigger-automation-server) - Automation & workflow engine
+
+### Shared Resources  
+- 📚 [**Shared Libraries**](https://github.com/tiation/tiation-rigger-shared-libraries) - Common utilities & components
+- 📊 [**Metrics Dashboard**](https://github.com/tiation/tiation-rigger-metrics-dashboard) - Performance monitoring & analytics
+- 📖 [**Documentation Hub**](https://github.com/tiation/tiation-rigger-workspace-docs) - Comprehensive project documentation
+
+### Live Demos & Documentation
+- 🌐 [**Workspace Demo**](https://tiation.github.io/tiation-rigger-workspace/) - Interactive workspace overview
+- 📋 [**Infrastructure Docs**](https://tiation.github.io/tiation-rigger-infrastructure/) - Deployment guides
+- 📊 [**Metrics Dashboard**](https://tiation.github.io/tiation-rigger-metrics-dashboard/) - Live monitoring demo
+- 📚 [**Complete Documentation**](https://tiation.github.io/tiation-rigger-workspace-docs/) - Full project documentation
+
+---
+
