@@ -1,0 +1,33 @@
+# Simplified Cloud Build configuration for initial deployment
+steps:
+  # Build API Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build',
+      '-t', 'gcr.io/$PROJECT_ID/rigger-platform-api:latest',
+      '-f', 'apps/api/Dockerfile.simple',
+      '.'
+    ]
+    id: 'build-api'
+
+  # Build Web Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build',
+      '-t', 'gcr.io/$PROJECT_ID/rigger-platform-web:latest',
+      '-f', 'apps/web/Dockerfile.simple',
+      '.'
+    ]
+    id: 'build-web'
+
+# Push images to Container Registry
+images:
+  - 'gcr.io/$PROJECT_ID/rigger-platform-api:latest'
+  - 'gcr.io/$PROJECT_ID/rigger-platform-web:latest'
+
+# Build options
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+# Build timeout
+timeout: '1200s'
