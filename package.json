@@ -25,6 +25,7 @@
     "dev:connect": "turbo run dev --filter=connect-app",
     "dev:ai-dashboard": "turbo run start --filter=mobile-ai-dashboard",
     "dev:automation": "turbo run dev --filter=automation-server",
+    "dev:ios-enhanced": "cd apps/mobile-ios-enhanced && open RiggerHireApp.xcodeproj",
     "build:all": "turbo run build",
     "mobile:android": "turbo run android --filter=mobile-ai-dashboard",
     "mobile:ios": "turbo run ios --filter=mobile-ai-dashboard",

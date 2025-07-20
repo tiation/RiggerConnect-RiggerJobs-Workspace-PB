@@ -31,7 +31,8 @@ tiation-rigger-workspace/
 │   ├── jobs-portal/                   # Job management portal
 │   ├── connect-app/                   # RiggerConnect social platform
 │   ├── mobile-ai-dashboard/           # AI monitoring dashboard (React Native)
-│   ├── mobile-ios/                    # Native iOS app
+│   ├── mobile-ios/                    # Native iOS app (standard)
+│   ├── mobile-ios-enhanced/           # Enhanced dual iOS apps (RiggerHire + RiggerHub)
 │   ├── mobile-android/                # Native Android app
 │   └── mobile-react-native/           # Cross-platform React Native app
 │
@@ -161,12 +162,22 @@ pnpm build:all
 
 #### **iOS App** (`apps/mobile-ios/`)
 - **Tech Stack**: SwiftUI, Swift 5+
-- **Purpose**: Native iOS experience for workers
+- **Purpose**: Standard native iOS experience for workers
 - **Features**: 
   - Push notifications for job matches
   - Camera integration for document upload
   - Location-based job discovery
   - Offline capability
+
+#### **Enhanced iOS Apps** (`apps/mobile-ios-enhanced/`)
+- **Tech Stack**: SwiftUI, Swift 5.9+, Supabase, Stripe
+- **Purpose**: Enterprise dual-app system (RiggerHire + RiggerHub)
+- **Features**:
+  - Dual-app architecture for employers and workers
+  - Dark neon UI theme with cyan/magenta gradients
+  - Advanced job matching and payment processing
+  - Real-time messaging and application tracking
+  - Professional enterprise-grade functionality
 
 #### **Android App** (`apps/mobile-android/`)
 - **Tech Stack**: Kotlin, Android SDK, Jetpack Compose
