@@ -94,7 +94,10 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.7 }}
               className="flex flex-col sm:flex-row gap-4 pt-4"
             >
-              <motion.button
+              <motion.a
+                href="https://tiation.net/business/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group px-8 py-4 bg-gradient-to-r from-rigger-blue to-rigger-orange text-white text-lg font-semibold rounded-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center space-x-2"
                 whileHover={{ 
                   scale: 1.05, 
@@ -104,16 +107,19 @@ export default function Hero() {
               >
                 <span>Start Free Trial</span>
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </motion.button>
+              </motion.a>
 
-              <motion.button
+              <motion.a
+                href="https://tiation.net/workers/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group px-8 py-4 bg-white text-rigger-blue border-2 border-rigger-blue text-lg font-semibold rounded-xl hover:bg-rigger-blue hover:text-white transition-all duration-300 flex items-center justify-center space-x-2"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <Play className="h-5 w-5" />
-                <span>Watch Demo</span>
-              </motion.button>
+                <span>Find Workers</span>
+              </motion.a>
             </motion.div>
 
             {/* Trust Indicators */}
