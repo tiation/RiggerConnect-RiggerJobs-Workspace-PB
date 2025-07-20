@@ -1,0 +1,27 @@
+.pricing-container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12;
+}
+
+.pricing-header {
+  @apply text-center;
+}
+
+.pricing-grid {
+  @apply mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-3;
+}
+
+.pricing-card {
+  @apply border border-gray-200 rounded-lg shadow-sm divide-y divide-gray-200;
+}
+
+.pricing-card-header {
+  @apply p-6;
+}
+
+.pricing-card-features {
+  @apply px-6 pt-6 pb-8;
+}
+
+.pricing-card-cta {
+  @apply mt-8;
+}
