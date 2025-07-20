@@ -1,0 +1,50 @@
+
+    <svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+      <rect width="800" height="600" fill="#f8fafc"/>
+      
+      <!-- Mobile Apps -->
+      <rect x="50" y="50" width="120" height="80" fill="#3b82f6" rx="10"/>
+      <text x="110" y="80" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">RiggerConnect</text>
+      <text x="110" y="95" text-anchor="middle" fill="#93c5fd" font-family="Arial, sans-serif" font-size="8">Business App</text>
+      
+      <rect x="50" y="150" width="120" height="80" fill="#10b981" rx="10"/>
+      <text x="110" y="180" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">RiggerJobs</text>
+      <text x="110" y="195" text-anchor="middle" fill="#6ee7b7" font-family="Arial, sans-serif" font-size="8">Worker App</text>
+      
+      <!-- API Gateway -->
+      <rect x="300" y="100" width="120" height="80" fill="#f59e0b" rx="10"/>
+      <text x="360" y="130" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">API Gateway</text>
+      <text x="360" y="145" text-anchor="middle" fill="#fbbf24" font-family="Arial, sans-serif" font-size="8">AutomationServer</text>
+      
+      <!-- Database -->
+      <rect x="550" y="50" width="120" height="80" fill="#8b5cf6" rx="10"/>
+      <text x="610" y="80" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">MongoDB</text>
+      <text x="610" y="95" text-anchor="middle" fill="#c4b5fd" font-family="Arial, sans-serif" font-size="8">Database</text>
+      
+      <!-- Redis -->
+      <rect x="550" y="150" width="120" height="80" fill="#ef4444" rx="10"/>
+      <text x="610" y="180" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Redis</text>
+      <text x="610" y="195" text-anchor="middle" fill="#fca5a5" font-family="Arial, sans-serif" font-size="8">Cache</text>
+      
+      <!-- AWS Services -->
+      <rect x="300" y="250" width="120" height="80" fill="#ff6b35" rx="10"/>
+      <text x="360" y="280" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">AWS Services</text>
+      <text x="360" y="295" text-anchor="middle" fill="#ff9473" font-family="Arial, sans-serif" font-size="8">S3, Lambda, SES</text>
+      
+      <!-- Arrows -->
+      <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+        </marker>
+      </defs>
+      
+      <line x1="170" y1="90" x2="290" y2="130" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+      <line x1="170" y1="190" x2="290" y2="150" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+      <line x1="420" y1="120" x2="540" y2="90" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+      <line x1="420" y1="160" x2="540" y2="180" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+      <line x1="360" y1="180" x2="360" y2="240" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+      
+      <!-- Title -->
+      <text x="400" y="30" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif" font-size="16" font-weight="bold">RiggerConnect System Architecture</text>
+    </svg>
+  

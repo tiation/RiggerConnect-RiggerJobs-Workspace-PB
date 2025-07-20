@@ -29,6 +29,8 @@ tiation-rigger-workspace/
 │   ├── business-web/                  # Business portal (companies)
 │   ├── worker-web/                    # Worker portal (staff)
 │   ├── jobs-portal/                   # Job management portal
+│   ├── connect-app/                   # RiggerConnect social platform
+│   ├── mobile-ai-dashboard/           # AI monitoring dashboard (React Native)
 │   ├── mobile-ios/                    # Native iOS app
 │   ├── mobile-android/                # Native Android app
 │   └── mobile-react-native/           # Cross-platform React Native app
@@ -40,6 +42,8 @@ tiation-rigger-workspace/
 │
 ├── services/                          # Backend microservices
 │   ├── api-gateway/                   # Main API gateway
+│   ├── connect-api/                   # RiggerConnect API services
+│   ├── automation-server/             # AI automation and monitoring
 │   ├── auth/                          # Authentication service
 │   ├── jobs/                          # Job management service
 │   ├── workers/                       # Worker profile service
@@ -86,6 +90,9 @@ pnpm dev:web          # Marketing website
 pnpm dev:business     # Business portal
 pnpm dev:worker       # Worker portal
 pnpm dev:jobs         # Jobs portal
+pnpm dev:connect      # RiggerConnect platform
+pnpm dev:ai-dashboard # AI monitoring dashboard
+pnpm dev:automation   # Automation server
 ```
 
 ### **4. Build for Production**
@@ -131,6 +138,24 @@ pnpm build:all
   - Application tracking
   - Analytics and reporting
   - Team collaboration tools
+
+#### **RiggerConnect Platform** (`apps/connect-app/`)
+- **Tech Stack**: Next.js 14, TypeScript, Social Features
+- **Purpose**: Professional networking and community platform
+- **Features**:
+  - Social networking for construction professionals
+  - Industry connections and networking
+  - Community forums and discussions
+  - Professional development resources
+
+#### **AI Monitoring Dashboard** (`apps/mobile-ai-dashboard/`)
+- **Tech Stack**: React Native, Expo, TypeScript
+- **Purpose**: Real-time AI agent monitoring interface
+- **Features**:
+  - Live agent status tracking (12 Active Agents, 2847 Tasks)
+  - System performance metrics (CPU, Memory, Load)
+  - Real-time error monitoring and alerts
+  - Professional dark theme interface
 
 ### **📱 Mobile Applications**
 
@@ -188,6 +213,14 @@ pnpm build:all
 #### **Payment Service** (`services/payments/`)
 - **Integration**: Stripe payment processing
 - **Features**: Subscription management, payment methods, invoicing
+
+#### **RiggerConnect API** (`services/connect-api/`)
+- **Purpose**: Social platform API endpoints
+- **Features**: User connections, community features, networking APIs
+
+#### **Automation Server** (`services/automation-server/`)
+- **Purpose**: AI agent orchestration and monitoring
+- **Features**: Agent lifecycle management, task automation, performance monitoring
 
 #### **Compliance Service** (`services/compliance/`)
 - **Integration**: WorkSafe WA API
@@ -284,6 +317,10 @@ pnpm lint
 
 # Type check all TypeScript
 pnpm type-check
+
+# Mobile development
+pnpm mobile:android  # Build Android app
+pnpm mobile:ios      # Build iOS app
 ```
 
 ### **Docker Development**

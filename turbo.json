@@ -3,11 +3,23 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "dist/**", "build/**", "out/**"]
+      "outputs": [".next/**", "dist/**", "build/**", "out/**", "android/app/build/**", "ios/build/**"]
     },
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "start": {
+      "cache": false,
+      "persistent": true
+    },
+    "android": {
+      "dependsOn": ["build"],
+      "cache": false
+    },
+    "ios": {
+      "dependsOn": ["build"],
+      "cache": false
     },
     "test": {
       "dependsOn": ["^build"],
@@ -22,12 +34,16 @@
     "type-check": {
       "dependsOn": ["^build"],
       "outputs": []
+    },
+    "format": {
+      "outputs": []
     }
   },
   "globalDependencies": [
     "package.json",
     "tsconfig.json",
     ".eslintrc.js",
-    ".prettierrc.js"
+    ".prettierrc.js",
+    "turbo.json"
   ]
 }
