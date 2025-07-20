@@ -20,7 +20,8 @@
     "framer-motion": "^12.23.6",
     "next": "15.4.2",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "ws": "^8.17.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
