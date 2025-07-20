@@ -1,245 +1,322 @@
-# 📱 Enhanced RiggerHub iOS App
+# RiggerHub - Mobile Job Platform for Rigging Professionals
 
-## 🎯 **Overview**
+[![iOS](https://img.shields.io/badge/iOS-15.0+-blue.svg)](https://developer.apple.com/ios/)
+[![Swift](https://img.shields.io/badge/Swift-5.9-orange.svg)](https://swift.org/)
+[![SwiftUI](https://img.shields.io/badge/SwiftUI-4.0-blue.svg)](https://developer.apple.com/swiftui/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-This is a comprehensive native iOS application for the RiggerHub ecosystem, featuring dual-platform functionality for both employers and workers in the rigging and construction industry.
+## 🏗️ Overview
 
-**Key Differentiators from Standard Mobile iOS:**
-- Dual-app architecture (RiggerHireApp for employers, RiggerHubApp for workers)  
-- Enterprise-grade Swift/SwiftUI implementation
-- Dark neon theme with cyan/magenta gradients
-- Comprehensive Supabase backend integration
-- Advanced job matching and application workflows
+RiggerHub is a comprehensive dual-platform mobile application ecosystem designed specifically for the rigging and construction industry in Western Australia. The platform consists of two complementary applications:
 
----
+- **RiggerHireApp**: For employers to post jobs and manage hiring
+- **RiggerHubApp**: For workers (riggers, crane operators, construction staff) to find and apply for jobs
 
-## ✨ **Enhanced Features**
+This repository contains both applications, featuring enterprise-grade architecture, modern UI/UX design with a dark neon theme, and robust backend integration using Supabase.
 
-### **🏗️ For Employers (RiggerHireApp)**
-- Advanced job posting management
-- Candidate review and evaluation systems
-- Stripe payment integration for premium features
-- Real-time hiring analytics dashboard
-- Professional employer tools and workflows
+![RiggerHub Apps](https://via.placeholder.com/800x400/0a0f1c/00ccff?text=RiggerHub+Mobile+Apps)
 
-### **👷 For Workers (RiggerHubApp)**
-- Sophisticated job search with advanced filtering
-- Complete professional profile management
-- Real-time application tracking and messaging
-- Skills certification and verification system
-- Location-based job matching with GPS
+## ✨ Key Features
 
-### **🎨 Professional UI/UX**
-- **Dark Neon Theme**: Custom cyan (#00CCFF) and magenta (#FF00FF) design
-- **SwiftUI**: Modern declarative UI framework
-- **Enterprise UX**: Professional interface design
-- **Responsive Layout**: Optimized for all iPhone screen sizes
-- **Accessibility**: WCAG compliant with VoiceOver support
+### For Workers (RiggerHubApp)
+- 🔍 **Advanced Job Search** - Filter by location, job type, salary, and industry
+- 📝 **Profile Management** - Comprehensive professional profiles with skills and certifications
+- 📱 **Real-time Applications** - Apply to jobs instantly with custom cover letters
+- 💬 **Messaging System** - Direct communication with employers
+- 📊 **Application Tracking** - Monitor application status and progress
+- 🏆 **Rating System** - Build reputation through work history and reviews
+- 📍 **Location Services** - GPS-based job matching and distance calculations
 
----
+### For Employers (RiggerHireApp)
+- 📋 **Job Posting Management** - Create detailed job listings with requirements
+- 👥 **Candidate Review** - Browse and evaluate worker profiles
+- 💰 **Payment Integration** - Stripe/Supabase-powered billing and subscriptions
+- 📈 **Analytics Dashboard** - Track job performance and hiring metrics
+- 🔔 **Notification System** - Real-time updates on applications
 
-## 🏗️ **Architecture**
+### Shared Features
+- 🌙 **Dark Neon UI Theme** - Eye-catching cyan/magenta gradient design
+- 🔐 **Enterprise Security** - End-to-end encryption and secure authentication
+- 📱 **Mobile-First Design** - Optimized for iOS with responsive layouts
+- 🏢 **Industry-Specific** - Tailored for mining, construction, and industrial sectors
+- 🔄 **Real-time Sync** - Instant updates across all platforms
 
-### **Technology Stack**
-```swift
-let techStack = [
-    "Framework": "SwiftUI + iOS 15+",
-    "Architecture": "MVVM with Combine",
-    "Backend": "Supabase (PostgreSQL + Real-time)",
-    "Payment": "Stripe API Integration", 
-    "Theme": "Custom Dark Neon Design System",
-    "Authentication": "Supabase Auth + JWT",
-    "Storage": "Supabase Storage + Local Core Data"
-]
+## 🏗️ Architecture
+
+### Technology Stack
+- **Frontend**: SwiftUI, iOS 15+, Combine
+- **Backend**: Supabase (PostgreSQL, Real-time, Auth)
+- **Payment Processing**: Stripe API
+- **Architecture**: MVVM with Combine
+- **Theme**: Custom dark neon design system
+
+### Project Structure
+```
+RiggerHireApp/
+├── RiggerHireApp/              # Employer-focused app
+│   ├── Models/                 # Data models (User, Job)
+│   ├── Views/                  # SwiftUI views
+│   ├── Services/              # Network and business logic
+│   └── Utils/                 # Helper utilities
+├── RiggerHubApp/              # Worker-focused app
+│   ├── Models/                # Data models (Worker, JobListing)
+│   │   ├── Worker.swift       # Worker profile model
+│   │   └── JobListing.swift   # Job listing model
+│   ├── Views/                 # SwiftUI views
+│   │   ├── ContentView.swift  # Main tabbed interface
+│   │   ├── AuthenticationView.swift # Login/signup
+│   │   ├── JobSearchView.swift # Job browsing
+│   │   ├── JobDetailView.swift # Job details
+│   │   ├── JobFiltersView.swift # Advanced filtering
+│   │   └── PlaceholderViews.swift # Profile, messages, settings
+│   ├── Services/              # Network and business logic
+│   │   ├── AuthenticationManager.swift # Auth management
+│   │   └── SupabaseService.swift # Backend integration
+│   └── Utils/                 # Helper utilities
+│       └── ThemeManager.swift # Dark neon theme system
+└── Utils/                     # Shared utilities
 ```
 
-### **Key Components**
-- **Models**: Comprehensive data models for workers, jobs, applications
-- **Services**: Network layer, authentication, and business logic
-- **Views**: SwiftUI views with custom styling and animations
-- **Theme**: Centralized dark neon theme management
-- **Utils**: Helper functions and extensions
+## 🚀 Getting Started
 
----
-
-## 🚀 **Getting Started**
-
-### **Prerequisites**
+### Prerequisites
 - Xcode 15.0+
 - iOS 15.0+ deployment target
 - Swift 5.9+
-- Supabase project configured
-- Stripe account (for payment features)
+- Supabase account
+- Stripe account (for payments)
 
-### **Installation**
-```bash
-# Navigate to enhanced iOS app
-cd apps/mobile-ios-enhanced
+### Installation
 
-# Open in Xcode
-open RiggerHireApp.xcodeproj
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/tiation/RiggerHireApp.git
+   cd RiggerHireApp
+   ```
 
-# Or use the workspace command
-pnpm dev:ios-enhanced
+2. **Open in Xcode**
+   ```bash
+   open RiggerHireApp.xcodeproj
+   ```
+
+3. **Configure Supabase**
+   - Create a new Supabase project
+   - Update `SupabaseService.swift` with your credentials:
+   ```swift
+   private let baseURL = "YOUR_SUPABASE_URL"
+   private let apiKey = "YOUR_SUPABASE_ANON_KEY"
+   ```
+
+4. **Set up database schema**
+   Execute the SQL schema in your Supabase project:
+   ```sql
+   -- Workers table
+   CREATE TABLE workers (
+       id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+       first_name TEXT NOT NULL,
+       last_name TEXT NOT NULL,
+       email TEXT UNIQUE NOT NULL,
+       phone_number TEXT,
+       years_of_experience INTEGER DEFAULT 0,
+       hourly_rate DECIMAL(8,2) DEFAULT 0,
+       is_active BOOLEAN DEFAULT true,
+       is_verified BOOLEAN DEFAULT false,
+       profile_completeness DECIMAL(3,2) DEFAULT 0,
+       average_rating DECIMAL(3,2) DEFAULT 0,
+       created_at TIMESTAMPTZ DEFAULT NOW(),
+       updated_at TIMESTAMPTZ DEFAULT NOW()
+   );
+   
+   -- Job listings table
+   CREATE TABLE job_listings (
+       id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+       title TEXT NOT NULL,
+       company_name TEXT NOT NULL,
+       description TEXT NOT NULL,
+       job_type TEXT NOT NULL,
+       industry TEXT NOT NULL,
+       is_urgent BOOLEAN DEFAULT false,
+       is_remote BOOLEAN DEFAULT false,
+       posted_date TIMESTAMPTZ DEFAULT NOW(),
+       is_active BOOLEAN DEFAULT true
+   );
+   
+   -- Job applications table
+   CREATE TABLE job_applications (
+       id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+       job_id UUID REFERENCES job_listings(id),
+       worker_id UUID REFERENCES workers(id),
+       cover_letter TEXT,
+       proposed_rate DECIMAL(8,2),
+       application_date TIMESTAMPTZ DEFAULT NOW(),
+       status TEXT DEFAULT 'pending'
+   );
+   ```
+
+5. **Configure Stripe (Optional)**
+   - Add your Stripe keys to the payment integration
+
+6. **Build and Run**
+   - Select your target device/simulator
+   - Choose either RiggerHireApp or RiggerHubApp scheme
+   - Press `Cmd+R` to build and run
+
+## 🎨 Design System
+
+### Dark Neon Theme
+The application features a custom dark neon theme with:
+- **Primary Colors**: Cyan (#00CCFF) and Magenta (#FF00FF)
+- **Background**: Deep dark blue gradients
+- **Accents**: Bright neon highlights
+- **Typography**: SF Pro with various weights
+- **Interactive Elements**: Glowing buttons and borders
+
+### Component Examples
+```swift
+// Neon button style
+Button("Apply Now") {
+    // Action
+}
+.neonButtonStyle(themeManager)
+
+// Card with glow effect
+VStack {
+    // Content
+}
+.cardStyle(themeManager)
 ```
 
-### **Configuration**
+## 📱 Screenshots
+
+| Job Search | Job Details | Profile | Applications |
+|------------|-------------|---------|--------------|
+| ![Search](https://via.placeholder.com/200x400/0a0f1c/00ccff?text=Job+Search) | ![Details](https://via.placeholder.com/200x400/0a0f1c/ff00ff?text=Job+Details) | ![Profile](https://via.placeholder.com/200x400/0a0f1c/00ccff?text=Profile) | ![Apps](https://via.placeholder.com/200x400/0a0f1c/ff00ff?text=Applications) |
+
+## 🧪 Testing
+
+### Unit Tests
+```bash
+# Run unit tests
+xcodebuild test -scheme RiggerHubApp -destination 'platform=iOS Simulator,name=iPhone 15'
+```
+
+### Manual Testing Checklist
+- [ ] User registration and authentication
+- [ ] Job search and filtering
+- [ ] Application submission
+- [ ] Profile management
+- [ ] Dark theme consistency
+- [ ] Offline functionality
+- [ ] Push notifications
+
+## 🚀 Deployment
+
+### App Store Deployment
+1. **Archive the app**
+   - Product → Archive in Xcode
+2. **Upload to App Store Connect**
+   - Use Xcode Organizer or Transporter
+3. **Submit for Review**
+   - Complete App Store Connect metadata
+   - Submit for Apple review
+
+### Enterprise Distribution
+- Configure enterprise provisioning profiles
+- Use Apple Business Manager for internal distribution
+
+## 🔧 Configuration
+
+### Environment Variables
+Create a `Config.swift` file:
 ```swift
-// Update SupabaseConfig.swift
-struct SupabaseConfig {
-    static let url = "YOUR_SUPABASE_PROJECT_URL"
-    static let anonKey = "YOUR_SUPABASE_ANON_KEY"
+struct Config {
+    static let supabaseURL = "YOUR_SUPABASE_URL"
+    static let supabaseKey = "YOUR_SUPABASE_ANON_KEY"
+    static let stripePublishableKey = "YOUR_STRIPE_KEY"
 }
 ```
 
----
+### Build Configurations
+- **Debug**: Development environment with logging
+- **Release**: Production environment optimized for performance
+- **Staging**: Testing environment with beta features
 
-## 📊 **Database Schema**
+## 🤝 Contributing
 
-### **Core Tables**
-```sql
--- Workers (RiggerHubApp users)
-CREATE TABLE workers (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    first_name TEXT NOT NULL,
-    last_name TEXT NOT NULL,
-    email TEXT UNIQUE NOT NULL,
-    years_experience INTEGER DEFAULT 0,
-    hourly_rate DECIMAL(8,2) DEFAULT 0,
-    is_verified BOOLEAN DEFAULT false,
-    average_rating DECIMAL(3,2) DEFAULT 0,
-    created_at TIMESTAMPTZ DEFAULT NOW()
-);
+We welcome contributions from the community! Please follow these steps:
 
--- Job Listings
-CREATE TABLE job_listings (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    title TEXT NOT NULL,
-    company_name TEXT NOT NULL,
-    description TEXT NOT NULL,
-    job_type TEXT NOT NULL,
-    industry TEXT NOT NULL,
-    is_urgent BOOLEAN DEFAULT false,
-    posted_date TIMESTAMPTZ DEFAULT NOW()
-);
+1. **Fork the repository**
+2. **Create a feature branch**
+   ```bash
+   git checkout -b feature/amazing-feature
+   ```
+3. **Make your changes**
+   - Follow Swift style guidelines
+   - Add unit tests for new features
+   - Update documentation
+4. **Commit your changes**
+   ```bash
+   git commit -m "Add amazing feature"
+   ```
+5. **Push to the branch**
+   ```bash
+   git push origin feature/amazing-feature
+   ```
+6. **Open a Pull Request**
 
--- Applications
-CREATE TABLE job_applications (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    job_id UUID REFERENCES job_listings(id),
-    worker_id UUID REFERENCES workers(id),
-    cover_letter TEXT,
-    proposed_rate DECIMAL(8,2),
-    status TEXT DEFAULT 'pending',
-    application_date TIMESTAMPTZ DEFAULT NOW()
-);
-```
+### Code Style Guidelines
+- Use SwiftLint for code formatting
+- Follow MVVM architecture patterns
+- Comment complex business logic
+- Use descriptive variable names
 
----
+## 📈 Roadmap
 
-## 🎨 **Design System**
+### Version 1.1
+- [ ] Real-time chat messaging
+- [ ] Push notifications
+- [ ] Offline job caching
+- [ ] Advanced analytics
 
-### **Color Palette**
-```swift
-struct NeonColors {
-    static let primaryCyan = Color(red: 0, green: 0.8, blue: 1.0)        // #00CCFF
-    static let primaryMagenta = Color(red: 1.0, green: 0, blue: 1.0)     // #FF00FF  
-    static let backgroundDark = Color(red: 0.04, green: 0.06, blue: 0.11) // #0A0F1C
-    static let surfaceDark = Color(red: 0.1, green: 0.12, blue: 0.18)    // #1A1F2E
-    static let accentGlow = Color(red: 0, green: 1.0, blue: 1.0)         // #00FFFF
-}
-```
+### Version 1.2
+- [ ] Video application submissions
+- [ ] Skills assessment tests
+- [ ] Calendar integration
+- [ ] Apple Pay integration
 
-### **Typography**
-- **Display**: SF Pro Display Bold (28pt+)
-- **Headlines**: SF Pro Text Semibold (20-24pt)
-- **Body**: SF Pro Text Regular (16-18pt)  
-- **Captions**: SF Pro Text Medium (12-14pt)
+### Version 2.0
+- [ ] iPad support
+- [ ] watchOS companion app
+- [ ] AR job site visualization
+- [ ] AI-powered job matching
 
-### **Components**
-- **NeonButton**: Glowing buttons with gradient backgrounds
-- **JobCard**: Professional job listing cards with ratings
-- **ProfileCard**: Worker/employer profile displays
-- **FilterChips**: Interactive filter selection
-- **StatusBadges**: Color-coded status indicators
+## 🐛 Known Issues
 
----
+- Search performance may be slow with large datasets
+- Some animations may not render correctly on older devices
+- Offline mode is limited to cached data only
 
-## 📱 **Screen Architecture**
+## 📞 Support
 
-### **RiggerHubApp (Worker App)**
-- **AuthenticationView**: Login/signup with biometric support
-- **JobSearchView**: Advanced job search with filters
-- **JobDetailView**: Comprehensive job details with apply functionality
-- **ProfileView**: Complete worker profile management
-- **ApplicationsView**: Track application status and history
-- **MessagingView**: Direct communication with employers
+For technical support or questions:
 
-### **RiggerHireApp (Employer App)**  
-- **JobPostingView**: Create and manage job listings
-- **CandidateView**: Browse and evaluate worker profiles
-- **AnalyticsView**: Hiring metrics and performance tracking
-- **PaymentView**: Stripe integration for premium features
-- **NotificationsView**: Real-time hiring updates
+- **Email**: support@riggerhub.com
+- **GitHub Issues**: [Report a bug](https://github.com/tiation/RiggerHireApp/issues)
+- **Documentation**: [Wiki](https://github.com/tiation/RiggerHireApp/wiki)
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- **Apple** - for SwiftUI and iOS development tools
+- **Supabase** - for backend-as-a-service platform
+- **Stripe** - for payment processing infrastructure
+- **The Rigging Community** - for industry insights and feedback
 
 ---
 
-## 🔧 **Integration Points**
+**Built with ❤️ for the rigging industry by Tiation**
 
-### **Backend Services**
-- **Authentication**: Supabase Auth with JWT tokens
-- **Database**: Real-time PostgreSQL with RLS policies
-- **Storage**: Document and image upload via Supabase Storage
-- **Real-time**: Live updates for applications and messages
-- **Push Notifications**: APNs integration via Supabase
-
-### **Third-Party APIs**
-- **Stripe**: Payment processing for premium features
-- **MapKit**: Location-based job search and directions  
-- **Core Location**: GPS job matching and proximity alerts
-- **MessageKit**: Advanced messaging capabilities
-- **Photos**: Camera integration for profile photos
-
----
-
-## 🧪 **Testing Strategy**
-
-### **Unit Tests**
-- Model validation and business logic
-- Service layer API integration  
-- Authentication flow testing
-- Data transformation utilities
-
-### **UI Tests** 
-- Critical user journey automation
-- Accessibility compliance validation
-- Dark theme consistency checks
-- Cross-device responsive behavior
-
-### **Manual Testing**
-- Job search and application flows
-- Payment processing workflows  
-- Real-time messaging functionality
-- Push notification delivery
-
----
-
-## 🚀 **Deployment**
-
-### **App Store Distribution**
-```bash
-# Archive for App Store
-xcodebuild archive -scheme RiggerHubApp -archivePath build/RiggerHubApp.xcarchive
-
-# Upload to App Store Connect
-xcodebuild -exportArchive -archivePath build/RiggerHubApp.xcarchive -exportPath build/ -exportOptionsPlist exportOptions.plist
-```
-
-### **Enterprise Distribution**
-- In-house distribution for beta testing
-- TestFlight integration for stakeholder review
-- Crashlytics integration for crash reporting
-
----
-
-This enhanced iOS app provides a production-ready, enterprise-grade mobile experience that significantly exceeds the capabilities of the standard mobile iOS implementation, featuring comprehensive dual-app functionality, professional UI/UX, and robust backend integration.
+*Connecting skilled riggers with opportunities across Western Australia*
