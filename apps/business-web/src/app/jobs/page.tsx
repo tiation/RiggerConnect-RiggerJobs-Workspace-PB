@@ -1,9 +1,10 @@
 import { getJobs } from '@/lib/api';
+import { Job } from '@/lib/types/job';
 
 export const revalidate = 300; // Revalidate every 5 minutes
 
 export default async function JobsPage() {
-  const jobs = await getJobs();
+  const jobs: Job[] = await getJobs();
   return (
     <main className="min-h-screen pt-24 bg-background-dark">
       <div className="container mx-auto px-4">
