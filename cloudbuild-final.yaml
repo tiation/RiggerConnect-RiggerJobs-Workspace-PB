@@ -1,0 +1,25 @@
+# Final production deployment
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build',
+      '-t', 'gcr.io/$PROJECT_ID/rigger-platform-api:latest',
+      '-f', 'Dockerfile.hello-api',
+      '.'
+    ]
+    id: 'build-api'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build',
+      '-t', 'gcr.io/$PROJECT_ID/rigger-platform-web:latest',
+      '-f', 'Dockerfile.hello-web',
+      '.'
+    ]
+    id: 'build-web'
+
+images:
+  - 'gcr.io/$PROJECT_ID/rigger-platform-api:latest'
+  - 'gcr.io/$PROJECT_ID/rigger-platform-web:latest'
+
+timeout: '600s'
