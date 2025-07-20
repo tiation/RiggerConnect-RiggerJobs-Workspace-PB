@@ -49,7 +49,9 @@ export default function RegisterPage() {
   };
 
   // Get current industry requirements
-  const currentIndustryReqs = INDUSTRY_REQUIREMENTS[formData.industry];
+  const currentIndustryReqs = INDUSTRY_REQUIREMENTS.includes(formData.industry as IndustryType)
+    ? formData.industry
+    : null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
