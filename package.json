@@ -9,9 +9,9 @@
     "services/*"
   ],
   "scripts": {
+    "start": "node server.js",
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "start": "turbo run start",
     "test": "turbo run test",
     "lint": "turbo run lint",
     "type-check": "turbo run type-check",
@@ -69,6 +69,9 @@
     "prettier": "^3.0.0",
     "turbo": "^1.10.0",
     "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
   },
   "engines": {
     "node": ">=18.0.0",
