@@ -1,0 +1,51 @@
+2025-07-20T15:20:19.758088Z  WARN build:resolve_lockfile: turborepo_repository::package_graph::builder: Issues occurred when constructing package graph. Turbo will function, but some features may not be available: could not resolve workspaces: io error: No such file or directory (os error 2)
+2025-07-20T15:20:19.759369Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/.turbo-cookie"), AnchoredSystemPathBuf(".turbo/cookies/1.cookie")}
+2025-07-20T15:20:19.759373Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-07-20T15:20:23.161400Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/marketing-web/next-env.d.ts")}
+2025-07-20T15:20:23.161828Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("rigger-connect-marketing"), path: AnchoredSystemPathBuf("apps/marketing-web") }}))
+2025-07-20T15:20:23.760959Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/marketing-web/.next")}
+2025-07-20T15:20:23.760987Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("rigger-connect-marketing"), path: AnchoredSystemPathBuf("apps/marketing-web") }}))
+2025-07-20T15:20:23.821980Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-07-20T15:20:25.960116Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/jobs-portal/.next"), AnchoredSystemPathBuf("apps/worker-web/next-env.d.ts"), AnchoredSystemPathBuf("apps/worker-web/.next"), AnchoredSystemPathBuf("apps/jobs-portal/next-env.d.ts")}
+2025-07-20T15:20:25.960126Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("jobs-web"), path: AnchoredSystemPathBuf("apps/jobs-portal") }, WorkspacePackage { name: Other("web"), path: AnchoredSystemPathBuf("apps/worker-web") }}))
+2025-07-20T15:20:43.059811Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".claude/settings.local.json.tmp.41346.1753024842975"), AnchoredSystemPathBuf(".claude/settings.local.json")}
+2025-07-20T15:20:43.059836Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-07-20T15:21:43.459304Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/riggerhub-mobile/test.html"), AnchoredSystemPathBuf("apps/riggerhub-mobile/test.html.tmp.41346.1753024903380")}
+2025-07-20T15:21:43.459325Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("riggerhub-mobile"), path: AnchoredSystemPathBuf("apps/riggerhub-mobile") }}))
+2025-07-20T15:22:40.057542Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".claude/settings.local.json.tmp.41346.1753024959924")}
+2025-07-20T15:22:40.057554Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-07-20T15:22:43.558314Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".claude/settings.local.json.tmp.41346.1753024959924"), AnchoredSystemPathBuf(".claude/settings.local.json")}
+2025-07-20T15:22:43.558321Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-07-20T15:22:44.158208Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/riggerhub-mobile/test.html")}
+2025-07-20T15:22:44.158216Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("riggerhub-mobile"), path: AnchoredSystemPathBuf("apps/riggerhub-mobile") }}))
+2025-07-20T15:22:44.203191Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-07-20T15:38:42.500027Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("RiggerConnectMobileApp")}
+2025-07-20T15:38:42.502061Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-07-20T15:39:32.577081Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("tiation-rigger-platform/apps/mobile/ios/RiggerConnectMobileApp.xcworkspace")}
+2025-07-20T15:39:32.577092Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-07-20T15:39:32.776256Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("tiation-rigger-platform/apps/mobile/ios/RiggerConnectMobileApp.xcworkspace")}
+2025-07-20T15:39:32.776265Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-07-20T15:39:33.778148Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("tiation-rigger-platform/apps/mobile/ios/RiggerConnectMobileApp.xcworkspace/xcshareddata/swiftpm/configuration"), AnchoredSystemPathBuf("tiation-rigger-platform/apps/mobile/ios/RiggerConnectMobileApp.xcworkspace/xcshareddata"), AnchoredSystemPathBuf("tiation-rigger-platform/apps/mobile/ios/RiggerConnectMobileApp.xcworkspace/xcshareddata/swiftpm")}
+2025-07-20T15:39:33.778266Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-07-20T15:39:34.176301Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("tiation-rigger-platform/apps/mobile/ios/RiggerConnectMobileApp.xcodeproj")}
+2025-07-20T15:39:34.176311Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-07-20T15:39:37.776687Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("tiation-rigger-platform/apps/mobile/ios/RiggerConnectMobileApp.xcworkspace/xcuserdata/tiaastor.xcuserdatad/.dat.nosync28D6.sxJX01"), AnchoredSystemPathBuf("tiation-rigger-platform/apps/mobile/ios/RiggerConnectMobileApp.xcworkspace/xcuserdata"), AnchoredSystemPathBuf("tiation-rigger-platform/apps/mobile/ios/RiggerConnectMobileApp.xcworkspace/xcuserdata/tiaastor.xcuserdatad")}
+2025-07-20T15:39:37.776704Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-07-20T15:39:50.277704Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("tiation-rigger-platform/apps/mobile/ios/RiggerConnectMobileApp.xcworkspace/xcuserdata/tiaastor.xcuserdatad/.dat.nosync28D6.ML0OxZ")}
+2025-07-20T15:39:50.277730Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-07-20T15:40:00.876512Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("tiation-rigger-platform/apps/mobile/ios/RiggerConnectMobileApp.xcworkspace/xcuserdata/tiaastor.xcuserdatad/.dat.nosync28D6.ML0OxZ")}
+2025-07-20T15:40:00.876537Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-07-20T15:40:10.277198Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("WebApplications/RiggerDashboard/docs/README.md")}
+2025-07-20T15:40:10.277208Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-07-20T15:40:10.477285Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("WebApplications/RiggerDashboard/docs/README.md")}
+2025-07-20T15:40:10.477295Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-07-20T15:40:15.276659Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("tiation-rigger-platform/apps/mobile/ios/RiggerConnectMobileApp.xcworkspace/xcuserdata/tiaastor.xcuserdatad/.dat.nosync28D6.jMUOn5")}
+2025-07-20T15:40:15.276673Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-07-20T15:53:57.732533Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("_tmp_45061_c8058b0278687dee013a763b8c48cf10"), AnchoredSystemPathBuf("")}
+2025-07-20T15:53:57.733244Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-07-20T15:54:00.725753Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("")}
+2025-07-20T15:54:00.725760Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({}))
+2025-07-20T15:54:00.829826Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("")}
+2025-07-20T15:54:00.829956Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({}))
+2025-07-20T15:54:51.825214Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("pnpm-lock.yaml"), AnchoredSystemPathBuf("pnpm-lock.yaml.396716663")}
+2025-07-20T15:54:51.825234Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
