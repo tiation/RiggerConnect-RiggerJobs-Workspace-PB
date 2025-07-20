@@ -89,7 +89,10 @@ export default function CTA() {
             viewport={{ once: true }}
             className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12"
           >
-            <motion.button
+            <motion.a
+              href="https://tiation.net/business/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group px-10 py-5 bg-white text-rigger-blue text-lg font-bold rounded-2xl hover:shadow-2xl transition-all duration-300 flex items-center space-x-3 min-w-[250px] justify-center"
               whileHover={{ 
                 scale: 1.05,
@@ -99,16 +102,19 @@ export default function CTA() {
             >
               <span>Start Free Trial</span>
               <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </motion.button>
+            </motion.a>
 
-            <motion.button
+            <motion.a
+              href="https://tiation.net/workers/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group px-10 py-5 bg-transparent border-2 border-white text-white text-lg font-bold rounded-2xl hover:bg-white hover:text-rigger-blue transition-all duration-300 flex items-center space-x-3 min-w-[250px] justify-center backdrop-blur-sm"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <Play className="h-5 w-5" />
-              <span>Watch Demo</span>
-            </motion.button>
+              <span>Find Jobs</span>
+            </motion.a>
           </motion.div>
 
           {/* Trust Indicators */}

@@ -17,8 +17,8 @@ export default function Header() {
   }, [])
 
   const navItems = [
-    { name: 'For Workers', href: '/workers' },
-    { name: 'For Business', href: '/business' },
+    { name: 'For Workers', href: 'https://tiation.net/workers/' },
+    { name: 'For Business', href: 'https://tiation.net/business/' },
     { name: 'Features', href: '#features' },
     { name: 'Pricing', href: '#pricing' },
   ]
