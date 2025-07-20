@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StatusBar, Alert, LogBox } from 'react-native';
+import { StatusBar, Alert, LogBox, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -24,37 +24,37 @@ const Stack = createStackNavigator();
 // Mock screens for demo
 const MyJobsScreen = () => {
   return (
-    <div style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f5f5f5' }}>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f5f5f5' }}>
       <MaterialCommunityIcons name="briefcase" size={64} color={Colors.primary[500]} />
-      <h2 style={{ marginTop: 16, color: Colors.text.primary }}>My Jobs</h2>
-      <p style={{ color: Colors.text.secondary, textAlign: 'center', marginTop: 8 }}>
+      <Text style={{ marginTop: 16, color: Colors.text.primary, fontSize: 24, fontWeight: 'bold' }}>My Jobs</Text>
+      <Text style={{ color: Colors.text.secondary, textAlign: 'center', marginTop: 8 }}>
         Track your applications and active jobs
-      </p>
-    </div>
+      </Text>
+    </View>
   );
 };
 
 const ProfileScreen = () => {
   return (
-    <div style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f5f5f5' }}>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f5f5f5' }}>
       <MaterialCommunityIcons name="account" size={64} color={Colors.primary[500]} />
-      <h2 style={{ marginTop: 16, color: Colors.text.primary }}>Profile</h2>
-      <p style={{ color: Colors.text.secondary, textAlign: 'center', marginTop: 8 }}>
+      <Text style={{ marginTop: 16, color: Colors.text.primary, fontSize: 24, fontWeight: 'bold' }}>Profile</Text>
+      <Text style={{ color: Colors.text.secondary, textAlign: 'center', marginTop: 8 }}>
         Manage your profile and preferences
-      </p>
-    </div>
+      </Text>
+    </View>
   );
 };
 
 const PaymentsScreen = () => {
   return (
-    <div style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f5f5f5' }}>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f5f5f5' }}>
       <MaterialCommunityIcons name="credit-card" size={64} color={Colors.primary[500]} />
-      <h2 style={{ marginTop: 16, color: Colors.text.primary }}>Payments</h2>
-      <p style={{ color: Colors.text.secondary, textAlign: 'center', marginTop: 8 }}>
+      <Text style={{ marginTop: 16, color: Colors.text.primary, fontSize: 24, fontWeight: 'bold' }}>Payments</Text>
+      <Text style={{ color: Colors.text.secondary, textAlign: 'center', marginTop: 8 }}>
         View payment history and earnings
-      </p>
-    </div>
+      </Text>
+    </View>
   );
 };
 
@@ -175,17 +175,16 @@ const App: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div style={{ 
+      <View style={{ 
         flex: 1, 
         justifyContent: 'center', 
         alignItems: 'center',
-        backgroundColor: Colors.primary[600],
-        color: 'white'
+        backgroundColor: Colors.primary[600]
       }}>
         <MaterialCommunityIcons name="loading" size={48} color="white" />
-        <h2 style={{ marginTop: 16, color: 'white' }}>RiggerHub</h2>
-        <p style={{ color: 'rgba(255,255,255,0.8)' }}>Loading...</p>
-      </div>
+        <Text style={{ marginTop: 16, color: 'white', fontSize: 24, fontWeight: 'bold' }}>RiggerHub</Text>
+        <Text style={{ color: 'rgba(255,255,255,0.8)', marginTop: 8 }}>Loading...</Text>
+      </View>
     );
   }
 
