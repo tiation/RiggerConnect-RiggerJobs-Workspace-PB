@@ -1,0 +1,100 @@
+/* Demo Components Stylesheet */
+
+.demo-container {
+  --cyan-glow: 0 0 20px rgba(6, 182, 212, 0.5);
+  --magenta-glow: 0 0 20px rgba(232, 121, 249, 0.5);
+}
+
+/* Neon theme enhancements */
+.neon-text {
+  text-shadow: 
+    0 0 5px rgba(6, 182, 212, 0.5),
+    0 0 10px rgba(232, 121, 249, 0.5);
+}
+
+.neon-border {
+  box-shadow:
+    inset 0 0 10px rgba(6, 182, 212, 0.3),
+    0 0 10px rgba(232, 121, 249, 0.3);
+}
+
+/* Interactive elements */
+.demo-button {
+  transition: all 0.3s ease;
+  background: linear-gradient(45deg, #06b6d4, #e879f9);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  color: white;
+  border-radius: 9999px;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+}
+
+.demo-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.demo-button:hover::before {
+  left: 100%;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .demo-container {
+    padding: 1rem;
+  }
+  
+  .demo-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Dark mode enhancements */
+@media (prefers-color-scheme: dark) {
+  .demo-container {
+    background: linear-gradient(to bottom, #0f172a, #020617);
+  }
+  
+  .neon-text {
+    text-shadow: 
+      0 0 7px rgba(6, 182, 212, 0.7),
+      0 0 14px rgba(232, 121, 249, 0.7);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .demo-button::before {
+    display: none;
+  }
+  
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* High contrast mode */
+@media (forced-colors: active) {
+  .demo-button {
+    border: 2px solid ButtonText;
+  }
+  
+  .neon-text {
+    text-shadow: none;
+  }
+}

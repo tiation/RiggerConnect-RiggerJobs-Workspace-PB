@@ -1,221 +1,109 @@
 version: '3.8'
 
 services:
-  # Database Services
+  # Database
   postgres:
     image: postgres:15-alpine
-    container_name: tiation-postgres
+    container_name: rigger-postgres
     environment:
-      POSTGRES_DB: tiation_rigger
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_DB: rigger_platform
+      POSTGRES_USER: rigger_user
+      POSTGRES_PASSWORD: rigger_password
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./database/init:/docker-entrypoint-initdb.d
-    networks:
-      - tiation-network
+      - ./infrastructure/docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rigger_user -d rigger_platform"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
-  mongodb:
-    image: mongo:7.0
-    container_name: tiation-mongodb
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: password
-      MONGO_INITDB_DATABASE: tiation_rigger
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongodb_data:/data/db
-      - ./database/mongo-init:/docker-entrypoint-initdb.d
-    networks:
-      - tiation-network
-
+  # Redis Cache
   redis:
-    image: redis:7.2-alpine
-    container_name: tiation-redis
-    command: redis-server --appendonly yes --requirepass password
+    image: redis:7-alpine
+    container_name: rigger-redis
     ports:
       - "6379:6379"
     volumes:
       - redis_data:/data
-    networks:
-      - tiation-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
-  # Backend Services
-  automation-server:
+  # API Service
+  api:
     build:
-      context: ../tiation-rigger-automation-server
-      dockerfile: Dockerfile
-    container_name: tiation-automation-server
+      context: .
+      dockerfile: ./apps/api/Dockerfile
+    container_name: rigger-api
     environment:
-      NODE_ENV: development
-      PORT: 3001
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_NAME: tiation_rigger
-      DB_USER: postgres
-      DB_PASSWORD: password
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-      REDIS_PASSWORD: password
-      MONGODB_URI: mongodb://admin:password@mongodb:27017/tiation_rigger?authSource=admin
-      JWT_SECRET: development_jwt_secret_key_very_long_and_secure
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://rigger_user:rigger_password@postgres:5432/rigger_platform
+      - REDIS_URL=redis://redis:6379
+      - JWT_SECRET=your-jwt-secret-key-change-in-production
+      - PORT=3001
     ports:
       - "3001:3001"
     depends_on:
-      - postgres
-      - mongodb
-      - redis
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     volumes:
-      - ../tiation-rigger-automation-server:/app
-      - /app/node_modules
-    networks:
-      - tiation-network
-    command: npm run dev
+      - ./uploads:/app/uploads
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
-  connect-api:
+  # Web Dashboard
+  web:
     build:
-      context: ../tiation-rigger-connect-api
-      dockerfile: Dockerfile
-    container_name: tiation-connect-api
+      context: .
+      dockerfile: ./apps/web/Dockerfile
+    container_name: rigger-web
     environment:
-      NODE_ENV: development
-      PORT: 3002
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_NAME: tiation_rigger
-      DB_USER: postgres
-      DB_PASSWORD: password
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-      REDIS_PASSWORD: password
-      MONGODB_URI: mongodb://admin:password@mongodb:27017/tiation_rigger?authSource=admin
-      JWT_SECRET: development_jwt_secret_key_very_long_and_secure
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=http://api:3001
+      - PORT=3000
     ports:
-      - "3002:3002"
+      - "3000:3000"
     depends_on:
-      - postgres
-      - mongodb
-      - redis
-    volumes:
-      - ../tiation-rigger-connect-api:/app
-      - /app/node_modules
-    networks:
-      - tiation-network
-    command: npm run dev
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
-  # Frontend Services
-  connect-app:
-    build:
-      context: ../tiation-rigger-connect-app
-      dockerfile: Dockerfile
-    container_name: tiation-connect-app
-    environment:
-      NODE_ENV: development
-      PORT: 3003
-      REACT_APP_API_URL: http://localhost:3002/api
-      REACT_APP_AUTOMATION_SERVER_URL: http://localhost:3001/api
-    ports:
-      - "3003:3003"
-    depends_on:
-      - automation-server
-      - connect-api
-    volumes:
-      - ../tiation-rigger-connect-app:/app
-      - /app/node_modules
-    networks:
-      - tiation-network
-    command: npm run dev
-
-  jobs-app:
-    build:
-      context: ../tiation-rigger-jobs-app
-      dockerfile: Dockerfile
-    container_name: tiation-jobs-app
-    environment:
-      NODE_ENV: development
-      PORT: 3004
-      REACT_APP_API_URL: http://localhost:3002/api
-      REACT_APP_AUTOMATION_SERVER_URL: http://localhost:3001/api
-    ports:
-      - "3004:3004"
-    depends_on:
-      - automation-server
-      - connect-api
-    volumes:
-      - ../tiation-rigger-jobs-app:/app
-      - /app/node_modules
-    networks:
-      - tiation-network
-    command: npm run dev
-
-  # Analytics & Monitoring
-  metrics-dashboard:
-    build:
-      context: ../tiation-rigger-metrics-dashboard
-      dockerfile: Dockerfile
-    container_name: tiation-metrics-dashboard
-    environment:
-      NODE_ENV: development
-      PORT: 3005
-      REACT_APP_API_URL: http://localhost:3002/api
-      REACT_APP_AUTOMATION_SERVER_URL: http://localhost:3001/api
-    ports:
-      - "3005:3005"
-    depends_on:
-      - automation-server
-      - connect-api
-    volumes:
-      - ../tiation-rigger-metrics-dashboard:/app
-      - /app/node_modules
-    networks:
-      - tiation-network
-    command: npm run dev
-
-  # Supporting Services
+  # Nginx Reverse Proxy
   nginx:
     image: nginx:alpine
-    container_name: tiation-nginx
+    container_name: rigger-nginx
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/ssl:/etc/nginx/ssl
+      - ./infrastructure/docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./infrastructure/docker/nginx/ssl:/etc/nginx/ssl
     depends_on:
-      - automation-server
-      - connect-api
-      - connect-app
-      - jobs-app
-      - metrics-dashboard
-    networks:
-      - tiation-network
-
-  # Documentation
-  docs:
-    build:
-      context: ../tiation-rigger-workspace-docs
-      dockerfile: Dockerfile
-    container_name: tiation-docs
-    environment:
-      NODE_ENV: development
-      PORT: 3006
-    ports:
-      - "3006:3006"
-    volumes:
-      - ../tiation-rigger-workspace-docs:/app
-      - /app/node_modules
-    networks:
-      - tiation-network
-    command: npm run dev
+      - web
+      - api
+    restart: unless-stopped
 
 volumes:
   postgres_data:
-  mongodb_data:
+    driver: local
   redis_data:
+    driver: local
 
 networks:
-  tiation-network:
+  default:
+    name: rigger-platform
     driver: bridge
