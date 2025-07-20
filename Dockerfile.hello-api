@@ -1,0 +1,12 @@
+FROM node:18-alpine
+WORKDIR /app
+RUN npm init -y && npm install express
+RUN echo 'const express = require("express"); \
+const app = express(); \
+app.get("/health", (req,res) => res.json({status:"ok", service:"rigger-api", timestamp: new Date().toISOString()})); \
+app.get("/", (req,res) => res.json({message:"RiggerHub API", version:"1.0.0", timestamp: new Date().toISOString()})); \
+app.get("/api/v1/jobs", (req,res) => res.json({success: true, data: [], total: 0, message: "Demo endpoint"})); \
+app.listen(3001, () => console.log("🚀 RiggerHub API Server running on port 3001")); \
+' > server.js
+EXPOSE 3001
+CMD ["node", "server.js"]

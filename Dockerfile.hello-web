@@ -1,0 +1,6 @@
+FROM node:18-alpine
+WORKDIR /app
+RUN npm init -y && npm install express
+RUN echo 'const express = require("express"); const app = express(); app.get("/api/health", (req,res) => res.json({status:"ok", service:"rigger-web", timestamp: new Date().toISOString()})); app.get("/", (req,res) => res.send("<h1>🏗️ RiggerHub - Construction Workforce Platform</h1><p>✅ Production Ready on Google Cloud!</p><p>Connecting skilled construction workers with opportunities</p><p>Supporting ChaseWhiteRabbit NGO</p>")); app.listen(3000, () => console.log("🌐 RiggerHub Web Server running on port 3000"));' > server.js
+EXPOSE 3000
+CMD ["node", "server.js"]
