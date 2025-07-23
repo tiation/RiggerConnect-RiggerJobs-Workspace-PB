@@ -1,0 +1,81 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#     https://docs.fastlane.tools/plugins/available-plugins
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Submit a new Beta Build to Internal Testing"
+  lane :beta do
+    # Build the Android app
+    gradle(task: "clean assembleRelease")
+    
+    # Upload to Play Store Internal Testing
+    upload_to_play_store(
+      track: 'internal',
+      skip_upload_apk: false,
+      skip_upload_aab: true,
+      skip_upload_metadata: true,
+      skip_upload_changelogs: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+    
+    # Send notification to Slack (optional)
+    # slack(
+    #   message: "Successfully deployed new RiggerHire Android beta build! 🚀",
+    #   channel: "#android-releases"
+    # )
+  end
+
+  desc "Deploy a new version to the Google Play Store"
+  lane :production do
+    # Build the Android app
+    gradle(task: "clean assembleRelease")
+    
+    # Upload to Play Store Production
+    upload_to_play_store(
+      track: 'production',
+      skip_upload_apk: false,
+      skip_upload_aab: true,
+      skip_upload_metadata: false,
+      skip_upload_changelogs: false,
+      skip_upload_images: false,
+      skip_upload_screenshots: false
+    )
+    
+    # Send success notification
+    # slack(
+    #   message: "🎉 RiggerHire Android app successfully deployed to Production! 🎉",
+    #   channel: "#releases"
+    # )
+  end
+  
+  desc "Build debug version"
+  lane :build_debug do
+    gradle(task: "clean assembleDebug")
+  end
+  
+  desc "Run unit tests"
+  lane :unit_tests do
+    gradle(task: "testDebugUnitTest")
+  end
+  
+  desc "Run instrumentation tests"
+  lane :instrumentation_tests do
+    gradle(task: "connectedDebugAndroidTest")
+  end
+end

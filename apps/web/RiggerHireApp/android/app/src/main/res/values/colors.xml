@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark Neon Theme Colors for RiggerHire -->
+    
+    <!-- Primary Neon Colors -->
+    <color name="neon_cyan">#00FFFF</color>
+    <color name="neon_magenta">#FF00FF</color>
+    <color name="neon_purple">#8A2BE2</color>
+    <color name="neon_blue">#0080FF</color>
+    <color name="neon_green">#39FF14</color>
+    
+    <!-- Gradient Colors -->
+    <color name="gradient_cyan_start">#00FFFF</color>
+    <color name="gradient_cyan_end">#0080FF</color>
+    <color name="gradient_magenta_start">#FF00FF</color>
+    <color name="gradient_magenta_end">#8A2BE2</color>
+    <color name="gradient_cyan_magenta">#00FFFF</color>
+    
+    <!-- Dark Background Colors -->
+    <color name="dark_background">#0D0D0D</color>
+    <color name="dark_surface">#1A1A1A</color>
+    <color name="dark_surface_variant">#262626</color>
+    <color name="dark_card">#1F1F1F</color>
+    
+    <!-- Text Colors -->
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#B3B3B3</color>
+    <color name="text_tertiary">#808080</color>
+    <color name="text_on_neon">#000000</color>
+    
+    <!-- Status Colors -->
+    <color name="success_neon">#39FF14</color>
+    <color name="warning_neon">#FFFF00</color>
+    <color name="error_neon">#FF073A</color>
+    <color name="info_neon">#00FFFF</color>
+    
+    <!-- Job Status Colors -->
+    <color name="job_active">#39FF14</color>
+    <color name="job_pending">#FFFF00</color>
+    <color name="job_completed">#0080FF</color>
+    <color name="job_cancelled">#FF073A</color>
+    
+    <!-- Accent Colors -->
+    <color name="accent_cyan">#40E0D0</color>
+    <color name="accent_purple">#DA70D6</color>
+    
+    <!-- Rating Colors -->
+    <color name="rating_excellent">#39FF14</color>
+    <color name="rating_good">#00FFFF</color>
+    <color name="rating_average">#FFFF00</color>
+    <color name="rating_poor">#FF073A</color>
+    
+    <!-- Overlay Colors -->
+    <color name="overlay_dark">#80000000</color>
+    <color name="overlay_neon">#4000FFFF</color>
+    
+    <!-- Border Colors -->
+    <color name="border_neon">#00FFFF</color>
+    <color name="border_inactive">#404040</color>
+    
+    <!-- Button States -->
+    <color name="button_pressed">#4000FFFF</color>
+    <color name="button_disabled">#404040</color>
+    
+</resources>

@@ -1,0 +1,88 @@
+{"dashboard": {
+  "id": null,
+  "title": "Rigger Ecosystem Overview",
+  "tags": ["rigger", "overview"],
+  "timezone": "browser",
+  "panels": [
+    {
+      "type": "graph",
+      "title": "Backend API Requests",
+      "targets": [
+        {
+          "expr": "rate(http_requests_total{job='rigger-backend'}[5m])",
+          "legendFormat": "{{status}}",
+          "refId": "A"
+        }
+      ],
+      "datasource": "Prometheus",
+      "xaxis": {
+        "mode": "time",
+        "show": true
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "show": true,
+          "label": "Requests/sec"
+        },
+        {
+          "format": "none",
+          "show": false
+        }
+      ]
+    },
+    {
+      "type": "graph",
+      "title": "Web App Traffic",
+      "targets": [
+        {
+          "expr": "rate(http_requests_total{job='rigger-web-apps'}[5m])",
+          "legendFormat": "{{status}}",
+          "refId": "B"
+        }
+      ],
+      "datasource": "Prometheus",
+      "xaxis": {
+        "mode": "time",
+        "show": true
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "show": true,
+          "label": "Requests/sec"
+        },
+        {
+          "format": "none",
+          "show": false
+        }
+      ]
+    },
+    {
+      "type": "singlestat",
+      "title": "Total Active Users",
+      "targets": [
+        {
+          "expr": "rigger_active_users_total",
+          "refId": "C"
+        }
+      ],
+      "datasource": "Prometheus",
+      "valueName": "current",
+      "format": "none",
+      "prefix": "Users",
+      "interval": null,
+      "nullText": "No data",
+      "colorBackground": true,
+      "colors": ["#299c46", "#f2c96d", "#d44a3a"],
+      "thresholds": "100,200",
+      "sparkline": {
+        "show": true,
+        "full": false,
+        "lineColor": "#d9d9d9"
+      }
+    }
+  ],
+  "schemaVersion": 18,
+  "version": 1
+}}

@@ -1,0 +1,143 @@
+# Prometheus configuration for Rigger ecosystem monitoring
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    cluster: 'rigger-production'
+    replica: 'prometheus-01'
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - alertmanager:9093
+
+# Load rules once and periodically evaluate them
+rule_files:
+  - "rigger_alerts.yml"
+  - "node_alerts.yml"
+
+# Scrape configurations
+scrape_configs:
+  # Prometheus itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+    scrape_interval: 5s
+
+  # Node Exporter for system metrics
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: 
+        - 'docker.sxc.codes:9100'      # Primary CI/CD host
+        - 'docker.tiation.net:9100'    # Secondary/staging host
+        - 'grafana.sxc.codes:9100'     # Grafana host
+        - 'elastic.sxc.codes:9100'     # Elasticsearch host
+        - 'ubuntu.sxc.codes:9100'      # General purpose host
+    scrape_interval: 10s
+
+  # Rigger Backend API
+  - job_name: 'rigger-backend'
+    static_configs:
+      - targets: 
+        - 'docker.sxc.codes:3001'      # Production backend
+        - 'docker.tiation.net:3001'    # Staging backend
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+    scrape_timeout: 5s
+
+  # Rigger Web Applications
+  - job_name: 'rigger-web-apps'
+    static_configs:
+      - targets:
+        - 'docker.sxc.codes:3000'      # RiggerConnect Web
+        - 'docker.sxc.codes:3002'      # RiggerHire Staff
+        - 'docker.tiation.net:3000'    # Staging Web
+        - 'docker.tiation.net:3002'    # Staging Staff
+    metrics_path: '/api/metrics'
+    scrape_interval: 15s
+
+  # PostgreSQL Database
+  - job_name: 'postgres-exporter'
+    static_configs:
+      - targets: 
+        - 'docker.sxc.codes:9187'      # Production DB
+        - 'docker.tiation.net:9187'    # Staging DB
+    scrape_interval: 10s
+
+  # Redis Cache
+  - job_name: 'redis-exporter'
+    static_configs:
+      - targets: 
+        - 'docker.sxc.codes:9121'      # Production Redis
+        - 'docker.tiation.net:9121'    # Staging Redis
+    scrape_interval: 10s
+
+  # Nginx Load Balancer
+  - job_name: 'nginx-exporter'
+    static_configs:
+      - targets: 
+        - 'docker.sxc.codes:9113'      # Production Nginx
+        - 'docker.tiation.net:9113'    # Staging Nginx
+    scrape_interval: 10s
+
+  # Docker container metrics
+  - job_name: 'docker-containers'
+    static_configs:
+      - targets: 
+        - 'docker.sxc.codes:8080'      # cAdvisor on primary host
+        - 'docker.tiation.net:8080'    # cAdvisor on staging host
+        - 'grafana.sxc.codes:8080'     # cAdvisor on Grafana host
+    scrape_interval: 10s
+
+  # Elasticsearch cluster
+  - job_name: 'elasticsearch'
+    static_configs:
+      - targets: 
+        - 'elastic.sxc.codes:9200'
+    metrics_path: '/_prometheus/metrics'
+    scrape_interval: 30s
+
+  # Grafana metrics
+  - job_name: 'grafana'
+    static_configs:
+      - targets:
+        - 'grafana.sxc.codes:3000'
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+
+  # GitLab CI/CD metrics
+  - job_name: 'gitlab'
+    static_configs:
+      - targets:
+        - 'gitlab.sxc.codes:9090'
+    metrics_path: '/-/metrics'
+    scrape_interval: 30s
+
+  # Custom application metrics
+  - job_name: 'rigger-business-metrics'
+    static_configs:
+      - targets:
+        - 'docker.sxc.codes:3001'
+    metrics_path: '/api/v1/metrics/business'
+    scrape_interval: 60s
+
+  # Supabase metrics (if self-hosted)
+  - job_name: 'supabase'
+    static_configs:
+      - targets:
+        - 'supabase.sxc.codes:8080'
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+
+# Remote write configuration for long-term storage
+remote_write:
+  - url: "https://prometheus-remote-write.grafana.net/api/prom/push"
+    basic_auth:
+      username: "${GRAFANA_CLOUD_PROMETHEUS_USER}"
+      password: "${GRAFANA_CLOUD_API_KEY}"
+    write_relabel_configs:
+      - source_labels: [__name__]
+        regex: 'rigger_.*'
+        action: keep

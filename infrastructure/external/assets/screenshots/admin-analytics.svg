@@ -1,0 +1,32 @@
+
+    <svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+      <rect width="600" height="400" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2" rx="10"/>
+      
+      <!-- Header -->
+      <rect x="0" y="0" width="600" height="60" fill="#1f2937" rx="10"/>
+      <text x="30" y="35" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">Admin Dashboard</text>
+      
+      <!-- Stats Cards -->
+      <rect x="20" y="80" width="160" height="80" fill="#3b82f6" rx="8"/>
+      <text x="100" y="105" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Active Jobs</text>
+      <text x="100" y="125" text-anchor="middle" fill="#93c5fd" font-family="Arial, sans-serif" font-size="20" font-weight="bold">1,247</text>
+      
+      <rect x="200" y="80" width="160" height="80" fill="#10b981" rx="8"/>
+      <text x="280" y="105" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Workers</text>
+      <text x="280" y="125" text-anchor="middle" fill="#6ee7b7" font-family="Arial, sans-serif" font-size="20" font-weight="bold">8,934</text>
+      
+      <rect x="380" y="80" width="160" height="80" fill="#f59e0b" rx="8"/>
+      <text x="460" y="105" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Revenue</text>
+      <text x="460" y="125" text-anchor="middle" fill="#fbbf24" font-family="Arial, sans-serif" font-size="20" font-weight="bold">$2.3M</text>
+      
+      <!-- Chart Area -->
+      <rect x="20" y="180" width="560" height="180" fill="white" stroke="#e2e8f0" stroke-width="1" rx="8"/>
+      <text x="300" y="200" text-anchor="middle" fill="#64748b" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Analytics Chart</text>
+      
+      <!-- Mock chart lines -->
+      <polyline points="40,320 100,280 160,290 220,250 280,240 340,220 400,210 460,200 520,190 560,180" 
+                stroke="#3b82f6" stroke-width="3" fill="none"/>
+      <polyline points="40,340 100,320 160,310 220,290 280,280 340,260 400,250 460,240 520,230 560,220" 
+                stroke="#10b981" stroke-width="3" fill="none"/>
+    </svg>
+  

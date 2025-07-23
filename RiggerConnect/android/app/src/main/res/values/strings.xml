@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RiggerConnect</string>
+    <string name="home_screen">Home</string>
+    <string name="job_list">Jobs</string>
+    <string name="post_job">Post Job</string>
+    <string name="business_dashboard">Dashboard</string>
+</resources>

@@ -1,0 +1,217 @@
+groups:
+  - name: rigger_application_alerts
+    rules:
+      # Backend API Health Check
+      - alert: RiggerBackendDown
+        expr: up{job="rigger-backend"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: backend
+          environment: "{{ $labels.instance }}"
+        annotations:
+          summary: "Rigger Backend API is down"
+          description: "Rigger Backend API on {{ $labels.instance }} has been down for more than 1 minute."
+
+      # Web Application Health Check
+      - alert: RiggerWebAppDown
+        expr: up{job="rigger-web-apps"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: frontend
+          environment: "{{ $labels.instance }}"
+        annotations:
+          summary: "Rigger Web Application is down"
+          description: "Rigger Web Application on {{ $labels.instance }} has been down for more than 2 minutes."
+
+      # High Response Time
+      - alert: RiggerHighResponseTime
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job="rigger-backend"}[5m])) > 2
+        for: 5m
+        labels:
+          severity: warning
+          service: backend
+        annotations:
+          summary: "High response time detected"
+          description: "95th percentile response time is {{ $value }}s for {{ $labels.instance }}"
+
+      # High Error Rate
+      - alert: RiggerHighErrorRate
+        expr: rate(http_requests_total{job="rigger-backend",status=~"5.."}[5m]) / rate(http_requests_total{job="rigger-backend"}[5m]) > 0.05
+        for: 5m
+        labels:
+          severity: warning
+          service: backend
+        annotations:
+          summary: "High error rate detected"
+          description: "Error rate is {{ $value | humanizePercentage }} for {{ $labels.instance }}"
+
+      # Database Connection Issues
+      - alert: RiggerDatabaseConnectionHigh
+        expr: rigger_database_connections_active / rigger_database_connections_max > 0.8
+        for: 5m
+        labels:
+          severity: warning
+          service: database
+        annotations:
+          summary: "High database connection usage"
+          description: "Database connection usage is {{ $value | humanizePercentage }} on {{ $labels.instance }}"
+
+      # Redis Connection Issues
+      - alert: RiggerRedisDown
+        expr: up{job="redis-exporter"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: cache
+        annotations:
+          summary: "Redis cache is down"
+          description: "Redis cache on {{ $labels.instance }} has been down for more than 1 minute."
+
+      # Job Processing Delays
+      - alert: RiggerJobQueueBacklog
+        expr: rigger_job_queue_pending > 100
+        for: 10m
+        labels:
+          severity: warning
+          service: jobs
+        annotations:
+          summary: "Job queue backlog detected"
+          description: "Job queue has {{ $value }} pending jobs for more than 10 minutes."
+
+      # Payment Processing Issues
+      - alert: RiggerPaymentProcessingFailed
+        expr: increase(rigger_payment_failures_total[1h]) > 5
+        for: 1m
+        labels:
+          severity: critical
+          service: payments
+        annotations:
+          summary: "High payment processing failures"
+          description: "{{ $value }} payment processing failures in the last hour."
+
+      # User Registration Rate Drop
+      - alert: RiggerUserRegistrationDrop
+        expr: rate(rigger_user_registrations_total[1h]) < 0.1
+        for: 30m
+        labels:
+          severity: warning
+          service: users
+        annotations:
+          summary: "User registration rate is low"
+          description: "User registration rate has dropped to {{ $value }} per hour."
+
+      # API Rate Limit Exceeded
+      - alert: RiggerAPIRateLimitExceeded
+        expr: increase(rigger_api_rate_limit_exceeded_total[5m]) > 10
+        for: 1m
+        labels:
+          severity: warning
+          service: api
+        annotations:
+          summary: "API rate limit frequently exceeded"
+          description: "API rate limit exceeded {{ $value }} times in the last 5 minutes."
+
+      # File Upload Failures
+      - alert: RiggerFileUploadFailures
+        expr: rate(rigger_file_upload_failures_total[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: warning
+          service: storage
+        annotations:
+          summary: "High file upload failure rate"
+          description: "File upload failure rate is {{ $value }} per second."
+
+      # Worker Safety Alert Integration
+      - alert: RiggerSafetyAlertProcessingDelay
+        expr: rigger_safety_alert_processing_duration_seconds > 300
+        for: 1m
+        labels:
+          severity: critical
+          service: safety
+        annotations:
+          summary: "Safety alert processing delayed"
+          description: "Safety alert processing is taking {{ $value }}s, exceeding the 5-minute SLA."
+
+  - name: rigger_infrastructure_alerts
+    rules:
+      # Container Memory Usage
+      - alert: RiggerContainerHighMemoryUsage
+        expr: (container_memory_usage_bytes{name=~"rigger-.*"} / container_spec_memory_limit_bytes{name=~"rigger-.*"}) > 0.9
+        for: 5m
+        labels:
+          severity: warning
+          service: infrastructure
+        annotations:
+          summary: "Container memory usage is high"
+          description: "Container {{ $labels.name }} memory usage is {{ $value | humanizePercentage }}"
+
+      # Container CPU Usage
+      - alert: RiggerContainerHighCPUUsage
+        expr: rate(container_cpu_usage_seconds_total{name=~"rigger-.*"}[5m]) > 0.8
+        for: 10m
+        labels:
+          severity: warning
+          service: infrastructure
+        annotations:
+          summary: "Container CPU usage is high"
+          description: "Container {{ $labels.name }} CPU usage is {{ $value | humanizePercentage }}"
+
+      # Disk Space Usage
+      - alert: RiggerLowDiskSpace
+        expr: (node_filesystem_free_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) < 0.1
+        for: 5m
+        labels:
+          severity: critical
+          service: infrastructure
+        annotations:
+          summary: "Low disk space"
+          description: "Disk space usage is {{ $value | humanizePercentage }} on {{ $labels.instance }}"
+
+      # Network Connectivity
+      - alert: RiggerNetworkConnectivityIssue
+        expr: up{job="node-exporter"} == 0
+        for: 2m
+        labels:
+          severity: warning
+          service: infrastructure
+        annotations:
+          summary: "Network connectivity issue"
+          description: "Cannot reach node exporter on {{ $labels.instance }}"
+
+  - name: rigger_business_alerts
+    rules:
+      # Revenue Tracking
+      - alert: RiggerRevenueDrop
+        expr: rate(rigger_revenue_total[1h]) < (rate(rigger_revenue_total[1h] offset 24h) * 0.7)
+        for: 2h
+        labels:
+          severity: warning
+          service: business
+        annotations:
+          summary: "Revenue drop detected"
+          description: "Revenue has dropped by more than 30% compared to the same time yesterday."
+
+      # Active Users
+      - alert: RiggerActiveUsersLow
+        expr: rigger_active_users_total < 100
+        for: 1h
+        labels:
+          severity: warning
+          service: business
+        annotations:
+          summary: "Low active user count"
+          description: "Active user count is {{ $value }}, which is below the expected threshold."
+
+      # Job Matching Success Rate
+      - alert: RiggerJobMatchingRateLow
+        expr: (rigger_job_matches_successful_total / rigger_job_matches_total) < 0.6
+        for: 30m
+        labels:
+          severity: warning
+          service: matching
+        annotations:
+          summary: "Job matching success rate is low"
+          description: "Job matching success rate is {{ $value | humanizePercentage }}"

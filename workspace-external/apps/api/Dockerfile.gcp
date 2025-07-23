@@ -1,0 +1,30 @@
+# Production API service
+FROM node:18-alpine AS base
+WORKDIR /app
+
+# Install curl for health checks
+RUN apk add --no-cache curl
+
+# Install dependencies
+COPY AutomationServer/package.json ./AutomationServer/
+COPY package*.json ./
+RUN cd AutomationServer && npm ci --only=production
+
+# Copy source code
+COPY AutomationServer/ ./AutomationServer/
+
+# Add non-root user for security
+RUN addgroup -g 1001 -S nodejs && adduser -S rigger -u 1001
+RUN chown -R rigger:nodejs /app
+USER rigger
+
+# Expose port
+EXPOSE 3001
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:3001/health || exit 1
+
+# Start the application
+WORKDIR /app/AutomationServer
+CMD ["node", "server.js"]

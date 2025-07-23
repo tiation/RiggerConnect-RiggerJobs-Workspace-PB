@@ -1,0 +1,46 @@
+# Super simple test deployment
+steps:
+  # Create a basic hello world API
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'run', '--rm', '--entrypoint=sh', 'node:18-alpine',
+      '-c', 'echo "FROM node:18-alpine\nWORKDIR /app\nRUN npm init -y && npm install express\nRUN echo \"const express = require(\\\"express\\\"); const app = express(); app.get(\\\"/health\\\", (req,res) => res.json({status:\\\"ok\\\", service:\\\"rigger-api\\\"})); app.get(\\\"/\\\", (req,res) => res.json({message:\\\"RiggerHub API\\\", version:\\\"1.0.0\\\"})); app.listen(3001, () => console.log(\\\"Server running on port 3001\\\")); \" > server.js\nEXPOSE 3001\nCMD [\\\"node\\\", \\\"server.js\\\"]" > Dockerfile.hello-api'
+    ]
+    id: 'create-api-dockerfile'
+    
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build',
+      '-t', 'gcr.io/$PROJECT_ID/rigger-platform-api:latest',
+      '-f', 'Dockerfile.hello-api',
+      '.'
+    ]
+    id: 'build-api'
+    waitFor: ['create-api-dockerfile']
+
+  # Create a basic hello world web
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'run', '--rm', '--entrypoint=sh', 'node:18-alpine',
+      '-c', 'echo "FROM node:18-alpine\nWORKDIR /app\nRUN npm init -y && npm install express\nRUN echo \"const express = require(\\\"express\\\"); const app = express(); app.get(\\\"/api/health\\\", (req,res) => res.json({status:\\\"ok\\\", service:\\\"rigger-web\\\"})); app.get(\\\"/\\\", (req,res) => res.send(\\\"<h1>RiggerHub - Construction Workforce Platform</h1><p>Coming Soon!</p>\\\"")); app.listen(3000, () => console.log(\\\"Web running on port 3000\\\")); \" > server.js\nEXPOSE 3000\nCMD [\\\"node\\\", \\\"server.js\\\"]" > Dockerfile.hello-web'
+    ]
+    id: 'create-web-dockerfile'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build',
+      '-t', 'gcr.io/$PROJECT_ID/rigger-platform-web:latest',
+      '-f', 'Dockerfile.hello-web',
+      '.'
+    ]
+    id: 'build-web'
+    waitFor: ['create-web-dockerfile']
+
+images:
+  - 'gcr.io/$PROJECT_ID/rigger-platform-api:latest'
+  - 'gcr.io/$PROJECT_ID/rigger-platform-web:latest'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+timeout: '1200s'

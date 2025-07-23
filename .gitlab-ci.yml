@@ -1,0 +1,374 @@
+# GitLab CI/CD Pipeline for Rigger Ecosystem
+# Using available infrastructure at gitlab.sxc.codes (145.223.22.10)
+
+stages:
+  - validate
+  - test
+  - security
+  - build
+  - deploy-staging
+  - deploy-production
+  - monitoring
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: "/certs"
+  # Container Registry Configuration
+  REGISTRY_URL: docker.sxc.codes:5000
+  BACKEND_IMAGE: $REGISTRY_URL/rigger/backend
+  CONNECT_WEB_IMAGE: $REGISTRY_URL/rigger/connect-web
+  HUB_WEB_IMAGE: $REGISTRY_URL/rigger/hub-web
+  HUB_ANDROID_IMAGE: $REGISTRY_URL/rigger/hub-android
+  HUB_IOS_IMAGE: $REGISTRY_URL/rigger/hub-ios
+  SHARED_LIB_IMAGE: $REGISTRY_URL/rigger/shared
+  BACKEND_IMAGE: $REGISTRY_URL/rigger-backend
+  
+  # Deployment hosts
+  DOCKER_HOST: docker.sxc.codes  # 145.223.22.7
+  STAGING_HOST: docker.tiation.net  # 145.223.22.9
+  GRAFANA_HOST: grafana.sxc.codes  # 153.92.214.1
+  ELASTIC_HOST: elastic.sxc.codes  # 145.223.22.14
+
+# Global before_script
+before_script:
+  - echo "Starting CI/CD pipeline for Rigger ecosystem"
+  - echo "Commit SHA: $CI_COMMIT_SHA"
+  - echo "Branch: $CI_COMMIT_REF_NAME"
+
+# Validate stage
+code-quality:
+  stage: validate
+  image: node:18-alpine
+  cache:
+    paths:
+      - node_modules/
+      - apps/web/RiggerHireApp/B2B-web/node_modules/
+      - apps/web/RiggerHireApp/Staff-web/node_modules/
+  script:
+    - echo "Running code quality checks..."
+    - |
+      # Check Backend API
+      if [ -f "RiggerBackend/api/package.json" ]; then
+        cd RiggerBackend/api
+        npm ci
+        npm run lint || echo "Backend linting failed"
+        npm run type-check || echo "Backend type checking failed"
+        cd ../..
+      fi
+    - |
+      # Check B2B Web App
+      if [ -f "apps/web/RiggerHireApp/B2B-web/package.json" ]; then
+        cd apps/web/RiggerHireApp/B2B-web
+        npm ci
+        npm run lint || echo "B2B web linting failed"
+        npm run type-check || echo "B2B web type checking failed"
+        cd ../../../..
+      fi
+    - |
+      # Check Staff Web App
+      if [ -f "apps/web/RiggerHireApp/Staff-web/package.json" ]; then
+        cd apps/web/RiggerHireApp/Staff-web
+        npm ci
+        npm run lint || echo "Staff web linting failed"
+        npm run type-check || echo "Staff web type checking failed"
+        cd ../../../..
+      fi
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "develop"
+
+# Test stage
+unit-tests:
+  stage: test
+  image: node:18-alpine
+  services:
+    - postgres:15-alpine
+    - redis:7-alpine
+  variables:
+    POSTGRES_DB: rigger_test
+    POSTGRES_USER: test_user
+    POSTGRES_PASSWORD: test_password
+    REDIS_PASSWORD: test_redis_password
+    DATABASE_URL: postgresql://test_user:test_password@postgres:5432/rigger_test
+    REDIS_URL: redis://:test_redis_password@redis:6379
+    NODE_ENV: test
+  cache:
+    paths:
+      - node_modules/
+      - RiggerBackend/api/node_modules/
+  script:
+    - echo "Running unit tests..."
+    - |
+      # Test Backend API
+      if [ -f "RiggerBackend/api/package.json" ]; then
+        cd RiggerBackend/api
+        npm ci
+        npm test || echo "Backend tests failed"
+        npm run test:coverage || echo "Backend coverage failed"
+        cd ../..
+      fi
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: RiggerBackend/api/coverage/cobertura-coverage.xml
+    paths:
+      - RiggerBackend/api/coverage/
+    expire_in: 1 week
+  coverage: '/Lines\s*:\s*(\d+\.?\d*)%/'
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "develop"
+
+integration-tests:
+  stage: test
+  image: node:18-alpine
+  services:
+    - docker:24-dind
+  variables:
+    DOCKER_HOST: tcp://docker:2376
+    DOCKER_TLS_CERTDIR: "/certs"
+  script:
+    - echo "Running integration tests..."
+    - apk add --no-cache docker-compose
+    - docker-compose -f devops/docker/docker-compose.test.yml up --build --abort-on-container-exit
+    - docker-compose -f devops/docker/docker-compose.test.yml down
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "develop"
+
+# Security stage
+security-scan:
+  stage: security
+  image: node:18-alpine
+  script:
+    - echo "Running security scans..."
+    - |
+      # npm audit for all projects
+      find . -name "package.json" -not -path "./node_modules/*" | while read package; do
+        dir=$(dirname "$package")
+        echo "Auditing $dir"
+        cd "$dir"
+        npm audit --audit-level moderate || echo "Security issues found in $dir"
+        cd - > /dev/null
+      done
+    - |
+      # Check for secrets in code
+      if command -v grep >/dev/null 2>&1; then
+        echo "Checking for potential secrets..."
+        grep -r -i "password\|secret\|key\|token" --include="*.js" --include="*.ts" --include="*.json" . | grep -v node_modules | grep -v ".git" || echo "No secrets pattern found"
+      fi
+  allow_failure: true
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "develop"
+
+# Build stage
+build-backend:
+  stage: build
+  image: docker:24
+  services:
+    - docker:24-dind
+  variables:
+    DOCKER_HOST: tcp://docker:2376
+    DOCKER_TLS_CERTDIR: "/certs"
+  before_script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $REGISTRY_URL
+  script:
+    - echo "Building backend Docker image..."
+    - |
+      docker build \
+        -f devops/docker/rigger-backend.Dockerfile \
+        -t $BACKEND_IMAGE:$CI_COMMIT_SHA \
+        -t $BACKEND_IMAGE:latest \
+        .
+    - docker push $BACKEND_IMAGE:$CI_COMMIT_SHA
+    - docker push $BACKEND_IMAGE:latest
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "develop"
+
+build-web-apps:
+  stage: build
+  image: docker:24
+  services:
+    - docker:24-dind
+  variables:
+    DOCKER_HOST: tcp://docker:2376
+    DOCKER_TLS_CERTDIR: "/certs"
+  before_script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $REGISTRY_URL
+  script:
+    - echo "Building web applications Docker images..."
+    - |
+      # Build RiggerConnect Web App
+      docker build \
+        -f devops/docker/rigger-connect-web.Dockerfile \
+        -t $CONNECT_WEB_IMAGE:$CI_COMMIT_SHA \
+        -t $CONNECT_WEB_IMAGE:latest \
+        .
+      docker push $CONNECT_WEB_IMAGE:$CI_COMMIT_SHA
+      docker push $CONNECT_WEB_IMAGE:latest
+    - |
+      # Build RiggerHire Staff Web App
+      docker build \
+        -f devops/docker/rigger-hire-staff.Dockerfile \
+        -t $HIRE_STAFF_IMAGE:$CI_COMMIT_SHA \
+        -t $HIRE_STAFF_IMAGE:latest \
+        .
+      docker push $HIRE_STAFF_IMAGE:$CI_COMMIT_SHA
+      docker push $HIRE_STAFF_IMAGE:latest
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "develop"
+
+# Deploy staging
+deploy-staging:
+  stage: deploy-staging
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache openssh-client docker-compose curl
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan -H $STAGING_HOST >> ~/.ssh/known_hosts
+  script:
+    - echo "Deploying to staging environment..."
+    - |
+      # Deploy to staging server (docker.tiation.net)
+      ssh root@$STAGING_HOST << 'EOF'
+        cd /opt/rigger-staging
+        
+        # Pull latest images
+        docker-compose -f docker-compose.staging.yml pull
+        
+        # Deploy with zero downtime
+        docker-compose -f docker-compose.staging.yml up -d --remove-orphans
+        
+        # Health check
+        sleep 30
+        curl -f http://localhost:3001/health || exit 1
+        curl -f http://localhost:3000/ || exit 1
+        
+        echo "Staging deployment successful"
+      EOF
+  environment:
+    name: staging
+    url: https://staging.riggerconnect.com
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop"
+  dependencies:
+    - build-backend
+    - build-web-apps
+
+# Deploy production
+deploy-production:
+  stage: deploy-production
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache openssh-client docker-compose curl
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan -H $DOCKER_HOST >> ~/.ssh/known_hosts
+  script:
+    - echo "Deploying to production environment..."
+    - |
+      # Deploy to production server (docker.sxc.codes)
+      ssh root@$DOCKER_HOST << 'EOF'
+        cd /opt/rigger-production
+        
+        # Create backup
+        docker-compose -f docker-compose.prod.yml exec -T postgres pg_dump -U rigger_user rigger_prod > backup-$(date +%Y%m%d-%H%M%S).sql
+        
+        # Pull latest images
+        docker-compose -f docker-compose.prod.yml pull
+        
+        # Deploy with rolling update
+        docker-compose -f docker-compose.prod.yml up -d --remove-orphans
+        
+        # Health checks with retries
+        for i in {1..10}; do
+          if curl -f http://localhost:3001/health && curl -f http://localhost:3000/; then
+            echo "Production deployment successful"
+            exit 0
+          fi
+          echo "Health check failed, retrying in 10 seconds..."
+          sleep 10
+        done
+        echo "Production deployment failed health checks"
+        exit 1
+      EOF
+  environment:
+    name: production
+    url: https://riggerconnect.com
+  when: manual
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+  dependencies:
+    - build-backend
+    - build-web-apps
+
+# Monitoring deployment
+setup-monitoring:
+  stage: monitoring
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache openssh-client curl
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan -H $GRAFANA_HOST >> ~/.ssh/known_hosts
+    - ssh-keyscan -H $ELASTIC_HOST >> ~/.ssh/known_hosts
+  script:
+    - echo "Setting up monitoring and logging..."
+    - |
+      # Setup Grafana dashboards
+      ssh root@$GRAFANA_HOST << 'EOF'
+        # Update Grafana dashboards for Rigger ecosystem
+        curl -X POST \
+          -H "Content-Type: application/json" \
+          -d @/opt/rigger-dashboards/rigger-overview.json \
+          http://admin:$GRAFANA_PASSWORD@localhost:3000/api/dashboards/db
+      EOF
+    - |
+      # Setup Elasticsearch indices
+      ssh root@$ELASTIC_HOST << 'EOF'
+        # Create Rigger application logs index template
+        curl -X PUT \
+          -H "Content-Type: application/json" \
+          -d @/opt/rigger-logs/rigger-index-template.json \
+          http://localhost:9200/_index_template/rigger-logs
+      EOF
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+  when: manual
+
+# Notification job
+notify-deployment:
+  stage: monitoring
+  image: alpine:latest
+  script:
+    - echo "Sending deployment notifications..."
+    - |
+      # Send email notification
+      if [ -n "$NOTIFICATION_EMAIL" ]; then
+        apk add --no-cache curl
+        curl -X POST \
+          -F "from=CI/CD <noreply@riggerconnect.com>" \
+          -F "to=$NOTIFICATION_EMAIL" \
+          -F "subject=Rigger Deployment - $CI_COMMIT_BRANCH" \
+          -F "text=Deployment of $CI_COMMIT_BRANCH completed successfully. Commit: $CI_COMMIT_SHA" \
+          https://api.mailgun.net/v3/riggerconnect.com/messages \
+          -u "api:$MAILGUN_API_KEY" || echo "Email notification failed"
+      fi
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "develop"
+  when: on_success

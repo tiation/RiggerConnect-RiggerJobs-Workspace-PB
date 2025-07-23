@@ -1,0 +1,37 @@
+# Build and deploy directly to Cloud Run
+steps:
+  # Build and deploy API
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: [
+      'run', 'deploy', 'rigger-platform-api',
+      '--source', '.',
+      '--dockerfile', 'Dockerfile.hello-api',
+      '--region', 'us-central1',
+      '--platform', 'managed',
+      '--allow-unauthenticated',
+      '--port', '3001',
+      '--memory', '512Mi',
+      '--cpu', '1',
+      '--min-instances', '0',
+      '--max-instances', '10'
+    ]
+    id: 'deploy-api'
+
+  # Build and deploy Web
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: [
+      'run', 'deploy', 'rigger-platform-web',
+      '--source', '.',
+      '--dockerfile', 'Dockerfile.hello-web',
+      '--region', 'us-central1',
+      '--platform', 'managed',
+      '--allow-unauthenticated',
+      '--port', '3000',
+      '--memory', '512Mi',
+      '--cpu', '1',
+      '--min-instances', '0',
+      '--max-instances', '5'
+    ]
+    id: 'deploy-web'
+
+timeout: '1200s'

@@ -1,0 +1,239 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:7-jammy
+    container_name: rigger-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: rigger_user
+      MONGO_INITDB_ROOT_PASSWORD: rigger_password
+      MONGO_INITDB_DATABASE: rigger_platform
+    volumes:
+      - mongodb_data:/data/db
+      - ./backend/database/init:/docker-entrypoint-initdb.d
+    ports:
+      - "27017:27017"
+    networks:
+      - rigger-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: rigger-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --requirepass rigger_redis_password
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - rigger-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: rigger-backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+      MONGODB_URI: mongodb://rigger_user:rigger_password@mongodb:27017/rigger_platform?authSource=admin
+      REDIS_URL: redis://:rigger_redis_password@redis:6379
+      JWT_SECRET: your-super-secret-jwt-key-change-in-production
+      SESSION_SECRET: your-super-secret-session-key-change-in-production
+      STRIPE_SECRET_KEY: sk_test_your_stripe_secret_key
+      STRIPE_WEBHOOK_SECRET: whsec_your_webhook_secret
+      TWILIO_ACCOUNT_SID: your_twilio_account_sid
+      TWILIO_AUTH_TOKEN: your_twilio_auth_token
+      AWS_ACCESS_KEY_ID: your_aws_access_key
+      AWS_SECRET_ACCESS_KEY: your_aws_secret_key
+      AWS_REGION: ap-southeast-2
+      AWS_S3_BUCKET: tiation-rigger-uploads
+      CORS_ORIGIN: http://localhost:3000
+    ports:
+      - "3001:3000"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    networks:
+      - rigger-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Frontend React App
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: rigger-frontend
+    restart: unless-stopped
+    environment:
+      REACT_APP_API_URL: http://localhost:3001
+      REACT_APP_STRIPE_PUBLIC_KEY: pk_test_your_stripe_public_key
+      REACT_APP_GOOGLE_MAPS_API_KEY: your_google_maps_api_key
+      REACT_APP_ENVIRONMENT: development
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - rigger-network
+    stdin_open: true
+    tty: true
+
+  # Admin Dashboard
+  admin:
+    build:
+      context: ./admin
+      dockerfile: Dockerfile
+    container_name: rigger-admin
+    restart: unless-stopped
+    environment:
+      REACT_APP_API_URL: http://localhost:3001
+      REACT_APP_ENVIRONMENT: development
+    ports:
+      - "3002:3000"
+    depends_on:
+      - backend
+    volumes:
+      - ./admin:/app
+      - /app/node_modules
+    networks:
+      - rigger-network
+
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    container_name: rigger-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/ssl:/etc/nginx/ssl
+      - ./nginx/logs:/var/log/nginx
+    depends_on:
+      - backend
+      - frontend
+      - admin
+    networks:
+      - rigger-network
+
+  # Elasticsearch for Search
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.8.0
+    container_name: rigger-elasticsearch
+    restart: unless-stopped
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - xpack.security.enabled=false
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    networks:
+      - rigger-network
+    profiles:
+      - search
+
+  # Kibana for Search Analytics
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.8.0
+    container_name: rigger-kibana
+    restart: unless-stopped
+    environment:
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    networks:
+      - rigger-network
+    profiles:
+      - search
+
+  # Monitoring with Prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: rigger-prometheus
+    restart: unless-stopped
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    ports:
+      - "9090:9090"
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    networks:
+      - rigger-network
+    profiles:
+      - monitoring
+
+  # Grafana for Monitoring Dashboard
+  grafana:
+    image: grafana/grafana:latest
+    container_name: rigger-grafana
+    restart: unless-stopped
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_INSTALL_PLUGINS: grafana-clock-panel,grafana-simple-json-datasource
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
+    ports:
+      - "3003:3000"
+    depends_on:
+      - prometheus
+    networks:
+      - rigger-network
+    profiles:
+      - monitoring
+
+volumes:
+  mongodb_data:
+    driver: local
+  redis_data:
+    driver: local
+  elasticsearch_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+
+networks:
+  rigger-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
