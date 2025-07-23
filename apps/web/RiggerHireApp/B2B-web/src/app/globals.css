@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+/* Base theme variables */
+:root {
+  --background: #0a0a0a;
+  --background-darker: #050505;
+  --foreground: #ffffff;
+  --primary-cyan: #00ffff;
+  --primary-magenta: #ff00ff;
+  --text-secondary: #a0a0a0;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  min-height: 100vh;
+}
+
+/* Accessibility Styles */
+*:focus-visible {
+  outline: 2px solid var(--primary-cyan);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(0, 255, 255, 0.3);
+}
+
+/* Skip to main content */
+.skip-to-main {
+  position: absolute;
+  left: -9999px;
+  z-index: 999;
+  padding: 1em;
+  background-color: var(--background-darker);
+  color: var(--primary-cyan);
+  text-decoration: none;
+}
+
+.skip-to-main:focus {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Neon Effects */
+.neon-cyan {
+  box-shadow: 0 0 10px var(--primary-cyan),
+             0 0 20px var(--primary-cyan),
+             0 0 30px var(--primary-cyan);
+}
+
+.neon-magenta {
+  box-shadow: 0 0 10px var(--primary-magenta),
+             0 0 20px var(--primary-magenta),
+             0 0 30px var(--primary-magenta);
+}
+
+/* Gradient Effects */
+.gradient-primary {
+  background: linear-gradient(135deg, var(--primary-cyan) 0%, var(--primary-magenta) 100%);
+}
+
+.gradient-text {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(135deg, var(--primary-cyan) 0%, var(--primary-magenta) 100%);
+}

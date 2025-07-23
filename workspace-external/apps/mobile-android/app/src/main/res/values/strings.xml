@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RiggerHire</string>
+    
+    <!-- App Description -->
+    <string name="app_description">Australia\'s Premier Rigging Jobs Platform</string>
+    <string name="app_tagline">Connecting certified riggers with mining, construction, and industrial projects across the Pilbara region</string>
+    
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_jobs">Jobs</string>
+    <string name="nav_profile">Profile</string>
+    <string name="nav_settings">Settings</string>
+    
+    <!-- Authentication -->
+    <string name="auth_login">Login</string>
+    <string name="auth_register">Register</string>
+    <string name="auth_logout">Logout</string>
+    <string name="auth_email">Email</string>
+    <string name="auth_password">Password</string>
+    <string name="auth_confirm_password">Confirm Password</string>
+    <string name="auth_forgot_password">Forgot Password?</string>
+    <string name="auth_create_account">Create Account</string>
+    <string name="auth_welcome_back">Welcome Back!</string>
+    <string name="auth_join_platform">Join the Platform</string>
+    
+    <!-- Job Listings -->
+    <string name="jobs_title">Available Jobs</string>
+    <string name="jobs_search">Search Jobs</string>
+    <string name="jobs_filter">Filter</string>
+    <string name="jobs_location">Location</string>
+    <string name="jobs_salary">Salary</string>
+    <string name="jobs_experience">Experience Level</string>
+    <string name="jobs_apply">Apply Now</string>
+    <string name="jobs_applied">Applied</string>
+    <string name="jobs_no_results">No jobs found</string>
+    
+    <!-- Job Details -->
+    <string name="job_description">Job Description</string>
+    <string name="job_requirements">Requirements</string>
+    <string name="job_responsibilities">Responsibilities</string>
+    <string name="job_benefits">Benefits</string>
+    <string name="job_company">Company</string>
+    <string name="job_type">Job Type</string>
+    <string name="job_duration">Duration</string>
+    <string name="job_posted">Posted</string>
+    
+    <!-- Profile -->
+    <string name="profile_title">My Profile</string>
+    <string name="profile_edit">Edit Profile</string>
+    <string name="profile_certifications">Certifications</string>
+    <string name="profile_experience">Experience</string>
+    <string name="profile_skills">Skills</string>
+    <string name="profile_applications">My Applications</string>
+    <string name="profile_rating">Rating</string>
+    
+    <!-- Features -->
+    <string name="feature_smart_matching">Smart Job Matching</string>
+    <string name="feature_gps_discovery">GPS-Based Discovery</string>
+    <string name="feature_transparent_pricing">Transparent Pricing</string>
+    <string name="feature_certification_mgmt">Certification Management</string>
+    <string name="feature_instant_notifications">Instant Notifications</string>
+    <string name="feature_fast_payment">Fast Payment</string>
+    
+    <!-- Feature Descriptions -->
+    <string name="desc_smart_matching">AI-powered algorithm matches you with relevant jobs based on certifications, location, and experience</string>
+    <string name="desc_gps_discovery">Find jobs near your current location with real-time distance calculations</string>
+    <string name="desc_transparent_pricing">See hourly rates upfront, no hidden fees</string>
+    <string name="desc_certification_mgmt">Upload and verify your rigging certifications digitally</string>
+    <string name="desc_instant_notifications">Get notified immediately when matching jobs are posted</string>
+    <string name="desc_fast_payment">Automated payment processing via Stripe upon job completion</string>
+    
+    <!-- Common Actions -->
+    <string name="action_save">Save</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_view">View</string>
+    <string name="action_apply">Apply</string>
+    <string name="action_share">Share</string>
+    <string name="action_refresh">Refresh</string>
+    
+    <!-- Status Messages -->
+    <string name="status_loading">Loading...</string>
+    <string name="status_error">Error occurred</string>
+    <string name="status_success">Success!</string>
+    <string name="status_no_internet">No internet connection</string>
+    <string name="status_server_error">Server error. Please try again.</string>
+    
+    <!-- Job Categories -->
+    <string name="category_mining">Mining</string>
+    <string name="category_construction">Construction</string>
+    <string name="category_industrial">Industrial</string>
+    <string name="category_offshore">Offshore</string>
+    <string name="category_maintenance">Maintenance</string>
+    
+    <!-- Certification Types -->
+    <string name="cert_dogman">Dogman</string>
+    <string name="cert_rigger">Rigger</string>
+    <string name="cert_crane_operator">Crane Operator</string>
+    <string name="cert_scaffolder">Scaffolder</string>
+    <string name="cert_safety">Safety Certificate</string>
+    
+    <!-- Location Names -->
+    <string name="location_perth">Perth</string>
+    <string name="location_pilbara">Pilbara</string>
+    <string name="location_kalgoorlie">Kalgoorlie</string>
+    <string name="location_newman">Newman</string>
+    <string name="location_port_hedland">Port Hedland</string>
+    
+</resources>

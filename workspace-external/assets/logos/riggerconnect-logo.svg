@@ -1,0 +1,7 @@
+
+    <svg width="200" height="100" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+      <rect width="200" height="100" fill="#2563eb" rx="10"/>
+      <text x="100" y="40" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">RiggerConnect</text>
+      <text x="100" y="60" text-anchor="middle" fill="#93c5fd" font-family="Arial, sans-serif" font-size="10">Job Matching Platform</text>
+    </svg>
+  

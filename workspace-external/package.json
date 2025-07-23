@@ -1,0 +1,86 @@
+{
+  "name": "tiation-rigger-workspace",
+  "version": "1.0.0",
+  "description": "Complete RiggerHub ecosystem - unified workspace for construction workforce platform",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "services/*"
+  ],
+  "scripts": {
+    "start": "node server.js",
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "type-check": "turbo run type-check",
+    "clean": "turbo run clean",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "setup": "pnpm install",
+    "dev:web": "turbo run dev --filter=marketing-web",
+    "dev:business": "turbo run dev --filter=business-web",
+    "dev:worker": "turbo run dev --filter=worker-web",
+    "dev:jobs": "turbo run dev --filter=jobs-portal",
+    "dev:connect": "turbo run dev --filter=connect-app",
+    "dev:ai-dashboard": "turbo run start --filter=mobile-ai-dashboard",
+    "dev:automation": "turbo run dev --filter=automation-server",
+    "dev:ios-enhanced": "cd apps/mobile-ios-enhanced && open RiggerHireApp.xcodeproj",
+    "build:all": "turbo run build",
+    "mobile:android": "turbo run android --filter=mobile-ai-dashboard",
+    "mobile:ios": "turbo run ios --filter=mobile-ai-dashboard",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:build": "docker-compose build",
+    "docker:logs": "docker-compose logs -f"
+  },
+  "keywords": [
+    "construction",
+    "rigger",
+    "crane-operator",
+    "job-matching",
+    "workforce",
+    "monorepo",
+    "turborepo",
+    "nextjs",
+    "react-native",
+    "nodejs",
+    "typescript"
+  ],
+  "author": "Tiation Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tiation/tiation-rigger-workspace.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tiation/tiation-rigger-workspace/issues"
+  },
+  "homepage": "https://riggerhub.com.au",
+  "devDependencies": {
+    "@commitlint/cli": "^17.6.7",
+    "@commitlint/config-conventional": "^17.6.7",
+    "@types/node": "^20.4.2",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.44.0",
+    "eslint-config-prettier": "^8.8.0",
+    "husky": "^8.0.3",
+    "metro": "^0.80.4",
+    "metro-cache": "^0.80.4",
+    "metro-core": "^0.80.4",
+    "metro-runtime": "^0.80.4",
+    "metro-source-map": "^0.80.4",
+    "prettier": "^3.0.0",
+    "turbo": "^1.10.0",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@8.6.0"
+}

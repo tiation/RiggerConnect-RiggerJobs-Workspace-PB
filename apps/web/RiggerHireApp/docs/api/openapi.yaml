@@ -1,0 +1,184 @@
+openapi: 3.0.0
+info:
+  title: RiggerHireApp API
+  description: Enterprise-grade API for the Western Australian construction and mining industries recruitment platform
+  version: 1.0.0
+  contact:
+    email: tiatheone@protonmail.com
+
+servers:
+  - url: https://api.riggerhireapp.com/v1
+    description: Production server
+  - url: https://staging-api.riggerhireapp.com/v1
+    description: Staging server
+
+tags:
+  - name: Authentication
+    description: User authentication and authorization endpoints
+  - name: Jobs
+    description: Job posting and management
+  - name: Workers
+    description: Worker profile and certification management
+  - name: Compliance
+    description: WorkSafe WA compliance and verification
+  - name: Payments
+    description: Payment processing and transaction management
+
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Authentication
+      summary: User login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+      responses:
+        '200':
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+
+  /jobs:
+    post:
+      tags:
+        - Jobs
+      summary: Create new job posting
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+      responses:
+        '201':
+          description: Job created successfully
+
+  /workers/verify:
+    post:
+      tags:
+        - Workers
+        - Compliance
+      summary: Verify worker credentials
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkerVerification'
+      responses:
+        '200':
+          description: Verification successful
+
+components:
+  schemas:
+    AuthResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+          format: email
+        role:
+          type: string
+          enum: [business, worker, admin]
+        verified:
+          type: boolean
+
+    JobPosting:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        requirements:
+          type: array
+          items:
+            type: string
+        location:
+          $ref: '#/components/schemas/Location'
+        certifications:
+          type: array
+          items:
+            type: string
+        rate:
+          type: number
+        duration:
+          type: string
+
+    WorkerVerification:
+      type: object
+      properties:
+        workerId:
+          type: string
+          format: uuid
+        certifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/Certification'
+        workSafeNumber:
+          type: string
+
+    Location:
+      type: object
+      properties:
+        site:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+          enum: [WA]
+        coordinates:
+          type: object
+          properties:
+            latitude:
+              type: number
+            longitude:
+              type: number
+
+    Certification:
+      type: object
+      properties:
+        type:
+          type: string
+        issuer:
+          type: string
+        number:
+          type: string
+        expiryDate:
+          type: string
+          format: date
+
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

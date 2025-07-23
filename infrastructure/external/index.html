@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiation Rigger Infrastructure</title>
+    <style>
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .header h1 {
+            font-size: 3rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .gradient-text {
+            background: linear-gradient(45deg, #00FFFF, #0080FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1rem 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(45deg, #00FFFF, #0080FF);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            margin: 0.5rem;
+            transition: transform 0.2s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏗️ Tiation Rigger <span class="gradient-text">Infrastructure</span></h1>
+            <p>Enterprise-grade infrastructure-as-code and DevOps automation</p>
+        </div>
+        
+        <div class="card">
+            <h2>🚀 Quick Links</h2>
+            <a href="https://github.com/tiation/tiation-rigger-infrastructure" class="btn">GitHub Repository</a>
+            <a href="https://github.com/tiation/tiation-rigger-workspace" class="btn">Main Workspace</a>
+            <a href="https://github.com/tiation/tiation-rigger-workspace-docs" class="btn">Documentation</a>
+        </div>
+        
+        <div class="features">
+            <div class="card">
+                <h3>🔧 Infrastructure as Code</h3>
+                <p>Terraform configurations for AWS, Azure, and Google Cloud Platform with best practices.</p>
+            </div>
+            <div class="card">
+                <h3>📊 Monitoring & Observability</h3>
+                <p>Prometheus, Grafana, and ELK stack configurations for comprehensive monitoring.</p>
+            </div>
+            <div class="card">
+                <h3>🔐 Security & Compliance</h3>
+                <p>Industry-standard security practices and compliance configurations.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

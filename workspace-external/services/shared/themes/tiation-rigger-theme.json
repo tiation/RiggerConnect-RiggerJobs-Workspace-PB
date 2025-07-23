@@ -1,0 +1,315 @@
+{
+  "metadata": {
+    "name": "Tiation Rigger Dark Neon Theme",
+    "version": "1.0.0",
+    "description": "Enterprise-grade dark neon theme with cyan/magenta gradients for Rigger ecosystem",
+    "author": "Tiation Team",
+    "email": "tiatheone@protonmail.com",
+    "lastUpdated": "2025-01-19",
+    "platforms": ["web", "mobile", "desktop"],
+    "frameworks": ["css", "scss", "react-native", "jekyll"]
+  },
+  
+  "colors": {
+    "primary": {
+      "cyan": "#00D4FF",
+      "magenta": "#FF0080",
+      "dark": "#0A0A0A",
+      "darker": "#050505"
+    },
+    
+    "secondary": {
+      "purple": "#8000FF",
+      "blue": "#0088FF",
+      "teal": "#00FFAA",
+      "pink": "#FF6699"
+    },
+    
+    "accent": {
+      "neon_green": "#00FF88",
+      "neon_orange": "#FFAA00",
+      "neon_red": "#FF3366",
+      "neon_yellow": "#FFD700"
+    },
+    
+    "background": {
+      "primary": "#0A0A0A",
+      "secondary": "#1A1A1A",
+      "tertiary": "#2A2A2A",
+      "card": "rgba(255, 255, 255, 0.05)",
+      "overlay": "rgba(0, 0, 0, 0.8)",
+      "glass": "rgba(255, 255, 255, 0.1)"
+    },
+    
+    "text": {
+      "primary": "#FFFFFF",
+      "secondary": "#CCCCCC",
+      "muted": "#999999",
+      "inverse": "#0A0A0A",
+      "accent": "#DEDEDE"
+    },
+    
+    "border": {
+      "primary": "rgba(0, 212, 255, 0.3)",
+      "secondary": "rgba(255, 255, 255, 0.1)",
+      "accent": "rgba(255, 0, 128, 0.3)",
+      "dark": "#333333",
+      "light": "#444444"
+    },
+    
+    "status": {
+      "success": "#00FF88",
+      "warning": "#FFAA00",
+      "error": "#FF3366",
+      "info": "#0088FF"
+    },
+    
+    "mining_industry": {
+      "safety": "#FFD700",
+      "hazard": "#FF4500",
+      "approved": "#00FF7F",
+      "pending": "#FFA500",
+      "caution": "#FFFF00",
+      "restricted": "#DC143C"
+    }
+  },
+  
+  "gradients": {
+    "primary": {
+      "colors": ["#00D4FF", "#FF0080"],
+      "angle": 135,
+      "css": "linear-gradient(135deg, #00D4FF 0%, #FF0080 100%)"
+    },
+    
+    "secondary": {
+      "colors": ["rgba(0, 212, 255, 0.2)", "rgba(255, 0, 128, 0.2)"],
+      "angle": 135,
+      "css": "linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(255, 0, 128, 0.2) 100%)"
+    },
+    
+    "background": {
+      "colors": ["#0A0A0A", "#1A0A1A", "#0A1A1A"],
+      "angle": 135,
+      "css": "linear-gradient(135deg, #0A0A0A 0%, #1A0A1A 50%, #0A1A1A 100%)"
+    },
+    
+    "button": {
+      "colors": ["#00D4FF", "#0088FF"],
+      "angle": 90,
+      "css": "linear-gradient(90deg, #00D4FF 0%, #0088FF 100%)"
+    },
+    
+    "card": {
+      "colors": ["#1A1A1A", "#2A2A2A"],
+      "angle": 135,
+      "css": "linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%)"
+    },
+    
+    "neon_glow": {
+      "colors": ["#00FFFF", "#FF00FF", "#00FF00"],
+      "angle": 45,
+      "css": "linear-gradient(45deg, #00FFFF 0%, #FF00FF 50%, #00FF00 100%)"
+    }
+  },
+  
+  "shadows": {
+    "primary": "0 4px 20px rgba(0, 212, 255, 0.2)",
+    "secondary": "0 8px 40px rgba(255, 0, 128, 0.1)",
+    "card": "0 10px 30px rgba(0, 0, 0, 0.5)",
+    "hover": "0 20px 60px rgba(0, 212, 255, 0.3)",
+    "neon_glow": "0 0 20px rgba(0, 255, 255, 0.5)",
+    "magenta_glow": "0 0 30px rgba(255, 0, 255, 0.4)",
+    "soft_glow": "0 0 10px rgba(255, 255, 255, 0.1)"
+  },
+  
+  "typography": {
+    "font_families": {
+      "primary": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+      "ios_primary": "SF Pro Display",
+      "ios_secondary": "SF Pro Text",
+      "monospace": "'SF Mono', 'Monaco', 'Menlo', monospace"
+    },
+    
+    "font_sizes": {
+      "xs": "0.75rem",
+      "sm": "0.875rem",
+      "base": "1rem",
+      "lg": "1.125rem",
+      "xl": "1.25rem",
+      "2xl": "1.5rem",
+      "3xl": "2rem",
+      "4xl": "2.5rem",
+      "5xl": "3rem",
+      "6xl": "4rem"
+    },
+    
+    "font_weights": {
+      "light": 300,
+      "normal": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700,
+      "extrabold": 800
+    },
+    
+    "line_heights": {
+      "tight": 1.2,
+      "normal": 1.5,
+      "relaxed": 1.6,
+      "loose": 1.8
+    },
+    
+    "letter_spacing": {
+      "tight": "-0.5px",
+      "normal": "0px",
+      "wide": "0.5px",
+      "wider": "1px"
+    },
+    
+    "mobile_typography": {
+      "h1": {
+        "fontSize": 32,
+        "fontWeight": "bold",
+        "lineHeight": 40,
+        "letterSpacing": -0.5
+      },
+      "h2": {
+        "fontSize": 28,
+        "fontWeight": "bold",
+        "lineHeight": 36,
+        "letterSpacing": -0.25
+      },
+      "h3": {
+        "fontSize": 24,
+        "fontWeight": "600",
+        "lineHeight": 32,
+        "letterSpacing": 0
+      },
+      "h4": {
+        "fontSize": 20,
+        "fontWeight": "600",
+        "lineHeight": 28,
+        "letterSpacing": 0.25
+      },
+      "body1": {
+        "fontSize": 16,
+        "fontWeight": "normal",
+        "lineHeight": 24,
+        "letterSpacing": 0.5
+      },
+      "body2": {
+        "fontSize": 14,
+        "fontWeight": "normal",
+        "lineHeight": 20,
+        "letterSpacing": 0.25
+      },
+      "caption": {
+        "fontSize": 12,
+        "fontWeight": "normal",
+        "lineHeight": 16,
+        "letterSpacing": 0.4
+      }
+    }
+  },
+  
+  "spacing": {
+    "xs": "0.25rem",
+    "sm": "0.5rem",
+    "md": "1rem",
+    "lg": "1.5rem",
+    "xl": "2rem",
+    "2xl": "3rem",
+    "3xl": "4rem",
+    "4xl": "5rem",
+    "5xl": "6rem",
+    
+    "mobile_spacing": {
+      "xs": 4,
+      "sm": 8,
+      "md": 16,
+      "lg": 24,
+      "xl": 32,
+      "2xl": 48,
+      "3xl": 64
+    }
+  },
+  
+  "border_radius": {
+    "none": "0",
+    "xs": "0.25rem",
+    "sm": "0.5rem",
+    "md": "0.75rem",
+    "lg": "1rem",
+    "xl": "1.5rem",
+    "2xl": "2rem",
+    "full": "9999px",
+    
+    "mobile_radius": {
+      "xs": 4,
+      "sm": 8,
+      "md": 12,
+      "lg": 16,
+      "xl": 24,
+      "full": 999
+    }
+  },
+  
+  "transitions": {
+    "fast": "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
+    "normal": "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+    "slow": "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+    
+    "mobile_animation": {
+      "scale": 200,
+      "fade": 300,
+      "slide": 250,
+      "bounce": 400
+    }
+  },
+  
+  "breakpoints": {
+    "xs": "576px",
+    "sm": "768px",
+    "md": "992px",
+    "lg": "1200px",
+    "xl": "1400px"
+  },
+  
+  "components": {
+    "button": {
+      "padding": "var(--spacing-sm) var(--spacing-lg)",
+      "border_radius": "var(--radius-md)",
+      "font_weight": "500",
+      "transition": "var(--transition-normal)"
+    },
+    
+    "card": {
+      "background": "var(--bg-card)",
+      "border": "1px solid var(--border-secondary)",
+      "border_radius": "var(--radius-xl)",
+      "box_shadow": "var(--shadow-card)"
+    },
+    
+    "input": {
+      "background": "var(--bg-secondary)",
+      "border": "1px solid var(--border-secondary)",
+      "border_radius": "var(--radius-md)",
+      "padding": "var(--spacing-md)",
+      "transition": "var(--transition-normal)"
+    }
+  },
+  
+  "accessibility": {
+    "focus_ring": "2px solid var(--primary-cyan)",
+    "focus_offset": "2px",
+    "min_touch_target": "44px",
+    "contrast_ratios": {
+      "normal": "4.5:1",
+      "large": "3:1"
+    }
+  },
+  
+  "jekyll_config": {
+    "custom_css_template": ":root {\n  --primary-color: #{colors.primary.cyan};\n  --secondary-color: #{colors.primary.magenta};\n  --background-color: #{colors.background.primary};\n  --text-color: #{colors.text.primary};\n  --accent-color: #{colors.accent.neon_green};\n}\n\nbody {\n  background: #{gradients.background.css};\n  color: var(--text-color);\n}"
+  }
+}

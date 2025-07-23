@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark Neon Theme for RiggerHire -->
+    <style name="Theme.RiggerHire.Dark" parent="Theme.Material3.DynamicColors.Dark">
+        <!-- Primary colors with cyan/magenta gradient -->
+        <item name="colorPrimary">@color/neon_cyan</item>
+        <item name="colorPrimaryVariant">@color/neon_magenta</item>
+        <item name="colorOnPrimary">@color/dark_background</item>
+        
+        <!-- Secondary colors -->
+        <item name="colorSecondary">@color/neon_purple</item>
+        <item name="colorSecondaryVariant">@color/neon_blue</item>
+        <item name="colorOnSecondary">@color/dark_background</item>
+        
+        <!-- Background colors -->
+        <item name="android:colorBackground">@color/dark_background</item>
+        <item name="colorSurface">@color/dark_surface</item>
+        <item name="colorOnBackground">@color/text_primary</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        
+        <!-- Status bar -->
+        <item name="android:statusBarColor">@color/dark_background</item>
+        <item name="android:windowLightStatusBar">false</item>
+        
+        <!-- Navigation bar -->
+        <item name="android:navigationBarColor">@color/dark_background</item>
+        
+        <!-- Accent color -->
+        <item name="colorAccent">@color/neon_cyan</item>
+    </style>
+
+    <!-- Button styles -->
+    <style name="RiggerHire.Button.Primary" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/gradient_cyan_magenta</item>
+        <item name="android:textColor">@color/dark_background</item>
+        <item name="android:textStyle">bold</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="android:elevation">8dp</item>
+    </style>
+    
+    <style name="RiggerHire.Button.Outline" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="strokeColor">@color/neon_cyan</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="android:textColor">@color/neon_cyan</item>
+        <item name="cornerRadius">12dp</item>
+    </style>
+
+    <!-- Text styles -->
+    <style name="RiggerHire.Text.Headline" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    
+    <style name="RiggerHire.Text.Title" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textColor">@color/neon_cyan</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    
+    <style name="RiggerHire.Text.Body" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <!-- Card styles -->
+    <style name="RiggerHire.Card" parent="Widget.Material3.CardView.Filled">
+        <item name="cardBackgroundColor">@color/dark_surface</item>
+        <item name="strokeColor">@color/neon_cyan</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">8dp</item>
+    </style>
+
+    <!-- Input field styles -->
+    <style name="RiggerHire.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/neon_cyan</item>
+        <item name="android:textColorHint">@color/text_secondary</item>
+        <item name="hintTextColor">@color/neon_cyan</item>
+    </style>
+
+</resources>
