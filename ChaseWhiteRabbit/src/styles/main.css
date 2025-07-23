@@ -1,0 +1,321 @@
+/* Celtic/Fantasy Theme CSS */
+:root {
+  --celtic-red: #cc0000;
+  --cream-bg: #efefde;
+  --white-highlight: #ffffff;
+  --text-dark: #2c1810;
+  --text-medium: #4a3a2a;
+  --shadow-dark: rgba(44, 24, 16, 0.3);
+  --border-thick: 4px;
+}
+
+/* Font Face for Celtic Font (fallback to serif if not available) */
+@font-face {
+  font-family: 'celticg';
+  src: url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap');
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  background-color: var(--cream-bg);
+  color: var(--text-dark);
+  line-height: 1.6;
+  min-height: 100vh;
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(204, 0, 0, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(204, 0, 0, 0.1) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+
+/* Headers with Celtic Font */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'celticg', 'Cinzel', 'Georgia', serif;
+  color: var(--celtic-red);
+  text-shadow: 2px 2px 4px var(--shadow-dark);
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 3rem;
+  text-align: center;
+  padding: 2rem 0;
+  background: linear-gradient(135deg, var(--white-highlight), var(--cream-bg));
+  border: var(--border-thick) solid var(--celtic-red);
+  border-radius: 15px;
+  margin: 2rem auto;
+  max-width: 90%;
+  box-shadow: 0 8px 16px var(--shadow-dark);
+  transition: all 0.3s ease;
+}
+
+h1:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px var(--shadow-dark);
+}
+
+h2 {
+  font-size: 2.2rem;
+  border-bottom: 3px solid var(--celtic-red);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+h3 {
+  font-size: 1.8rem;
+  color: var(--text-dark);
+  border-left: var(--border-thick) solid var(--celtic-red);
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Layout Components */
+header {
+  background: var(--white-highlight);
+  border-bottom: var(--border-thick) solid var(--celtic-red);
+  padding: 1rem 0;
+  box-shadow: 0 4px 8px var(--shadow-dark);
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: var(--white-highlight);
+  border: var(--border-thick) solid var(--celtic-red);
+  border-radius: 10px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 6px 12px var(--shadow-dark);
+}
+
+footer {
+  background: var(--cream-bg);
+  border-top: var(--border-thick) solid var(--celtic-red);
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-medium);
+  font-size: 0.9rem;
+}
+
+/* Collapsible Sections */
+.collapsible {
+  background: var(--cream-bg);
+  border: 2px solid var(--celtic-red);
+  border-radius: 8px;
+  margin: 1rem 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.collapsible-header {
+  background: var(--celtic-red);
+  color: var(--white-highlight);
+  padding: 1rem;
+  cursor: pointer;
+  font-family: 'celticg', 'Cinzel', serif;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.collapsible-header:hover {
+  background: #aa0000;
+}
+
+.collapsible-content {
+  padding: 1rem;
+  background: var(--white-highlight);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.collapsible.active .collapsible-content {
+  max-height: 1000px;
+  padding: 1.5rem;
+}
+
+.collapsible-arrow {
+  transition: transform 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.collapsible.active .collapsible-arrow {
+  transform: rotate(180deg);
+}
+
+/* Cards and Containers */
+.card {
+  background: var(--white-highlight);
+  border: 2px solid var(--celtic-red);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  box-shadow: 0 4px 8px var(--shadow-dark);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px var(--shadow-dark);
+  border-color: #aa0000;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background: var(--celtic-red);
+  color: var(--white-highlight);
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  font-family: 'celticg', 'Cinzel', serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 6px var(--shadow-dark);
+}
+
+.btn:hover {
+  background: #aa0000;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px var(--shadow-dark);
+}
+
+.btn-secondary {
+  background: var(--cream-bg);
+  color: var(--celtic-red);
+  border: 2px solid var(--celtic-red);
+}
+
+.btn-secondary:hover {
+  background: var(--white-highlight);
+  color: #aa0000;
+  border-color: #aa0000;
+}
+
+/* Animated Lines */
+.decorative-line {
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--celtic-red), transparent);
+  margin: 2rem 0;
+  animation: lineGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes lineGlow {
+  0% {
+    opacity: 0.6;
+    transform: scaleX(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+/* Color Transitions */
+.color-transition {
+  transition: color 0.4s ease, background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.2rem;
+    padding: 1.5rem 1rem;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+  }
+  
+  h3 {
+    font-size: 1.4rem;
+  }
+  
+  main {
+    padding: 1rem;
+    margin: 1rem;
+  }
+  
+  .card {
+    padding: 1rem;
+  }
+  
+  .btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.8rem;
+    padding: 1rem;
+  }
+  
+  :root {
+    --border-thick: 2px;
+  }
+  
+  main {
+    border-radius: 5px;
+  }
+  
+  .collapsible-header {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Special Celtic Elements */
+.celtic-border {
+  border: var(--border-thick) solid var(--celtic-red);
+  border-image: repeating-linear-gradient(45deg, var(--celtic-red), var(--celtic-red) 10px, transparent 10px, transparent 15px) 1;
+}
+
+.highlight-box {
+  background: var(--white-highlight);
+  padding: 1rem;
+  border-left: 5px solid var(--celtic-red);
+  margin: 1rem 0;
+  box-shadow: 2px 2px 6px var(--shadow-dark);
+}
+
+/* Scroll animations */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
