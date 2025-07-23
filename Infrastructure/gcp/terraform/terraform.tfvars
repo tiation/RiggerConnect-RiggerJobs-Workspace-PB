@@ -1,5 +1,0 @@
-project_id = "tiation-enterprise"
-region = "us-central1"
-zone = "us-central1-a"
-domain = ""
-environment = "production"

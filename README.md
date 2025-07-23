@@ -1,15 +1,15 @@
-# 🏗️ RiggerHub - Complete Construction Workforce Ecosystem
+# 🏗️ Tiation Rigger Workspace - Consolidated Structure
 
-> **The all-in-one platform connecting construction workers with companies while prioritizing safety and compliance**
+> **Enterprise-grade platform connecting Riggers, Doggers, and Crane Operators with Western Australian businesses**
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/node-18%2B-green.svg)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/typescript-5.0%2B-blue.svg)](https://www.typescriptlang.org/)
-[![Turborepo](https://img.shields.io/badge/turborepo-1.10%2B-orange.svg)](https://turbo.build/repo)
+[![Enterprise Grade](https://img.shields.io/badge/enterprise-grade-orange.svg)](#)
 
 ## 🌟 **Platform Overview**
 
-RiggerHub is a comprehensive construction workforce management platform that connects skilled workers (riggers, doggers, crane operators, safety officers) with construction companies across Australia. Built with a focus on safety, compliance, and efficiency.
+A consolidated workspace containing RiggerConnect (business app), RiggerHub (worker app), RiggerBackend (core services), and RiggerShared (common libraries). This platform serves the Western Australian construction, mining, and resources industry while supporting ChaseWhiteRabbit NGO's important community work.
 
 ### **🎯 Key Features**
 - **AI-Powered Job Matching**: Smart algorithms connect the right workers with the right jobs
@@ -20,43 +20,62 @@ RiggerHub is a comprehensive construction workforce management platform that con
 
 ---
 
-## 📁 **Repository Structure**
+## 📁 **Consolidated Repository Structure**
 
 ```
 tiation-rigger-workspace/
-├── apps/                              # Applications
-│   ├── marketing-web/                 # Next.js marketing website
-│   ├── business-web/                  # Business portal (companies)
-│   ├── worker-web/                    # Worker portal (staff)
-│   ├── jobs-portal/                   # Job management portal
-│   ├── connect-app/                   # RiggerConnect social platform
-│   ├── mobile-ai-dashboard/           # AI monitoring dashboard (React Native)
-│   ├── mobile-ios/                    # Native iOS app (standard)
-│   ├── mobile-ios-enhanced/           # Enhanced dual iOS apps (RiggerHire + RiggerHub)
-│   ├── mobile-android/                # Native Android app
-│   └── mobile-react-native/           # Cross-platform React Native app
+├── RiggerConnect/                     # Business job posting application
+│   ├── web/                          # Next.js web application
+│   ├── android/                      # Native Android app
+│   └── ios/                          # Native iOS app
 │
-├── packages/                          # Shared packages
-│   ├── ui-components/                 # Reusable UI components
-│   ├── design-system/                 # Design tokens and themes
-│   └── types/                         # Shared TypeScript types
+├── RiggerHub/                        # Worker job seeking application
+│   ├── web/                          # Next.js web application
+│   ├── android/                      # Native Android app
+│   └── ios/                          # Native iOS app
 │
-├── services/                          # Backend microservices
-│   ├── api-gateway/                   # Main API gateway
-│   ├── connect-api/                   # RiggerConnect API services
-│   ├── automation-server/             # AI automation and monitoring
-│   ├── auth/                          # Authentication service
-│   ├── jobs/                          # Job management service
-│   ├── workers/                       # Worker profile service
-│   ├── matching/                      # AI job matching engine
-│   ├── ai/                            # AI resume/job generation
-│   ├── payments/                      # Payment processing
-│   └── compliance/                    # WorkSafe WA integration
+├── RiggerBackend/                    # Core backend services
+│   ├── src/                          # Source code
+│   │   ├── controllers/              # API controllers
+│   │   ├── models/                   # Data models
+│   │   ├── services/                 # Business logic
+│   │   ├── middleware/               # Express middleware
+│   │   ├── routes/                   # API routes
+│   │   ├── utils/                    # Utility functions
+│   │   ├── validators/               # Input validation
+│   │   ├── compliance/               # Safety & compliance
+│   │   ├── contracts/                # Contract management
+│   │   └── safety/                   # Safety protocols
+│   ├── tests/                        # Backend tests
+│   ├── docs/                         # API documentation
+│   ├── migrations/                   # Database migrations
+│   └── seeds/                        # Database seeds
 │
-├── docs/                              # Comprehensive documentation
-├── database/                          # Database schemas and migrations
-├── infrastructure/                    # Infrastructure as Code
-└── scripts/                           # Automation scripts
+├── RiggerShared/                     # Shared libraries & utilities
+│   ├── types/                        # TypeScript definitions
+│   ├── constants/                    # Industry standards
+│   ├── utils/                        # Common utilities
+│   ├── components/                   # Shared UI components
+│   ├── contracts/                    # Contract templates
+│   ├── compliance/                   # WA regulations
+│   └── services/                     # Shared services
+│
+├── ChaseWhiteRabbit/                 # NGO integration
+│   ├── ngo-portal/                   # NGO management portal
+│   ├── funding-transparency/         # Financial transparency
+│   ├── impact-reports/               # Social impact tracking
+│   └── community-outreach/           # Community programs
+│
+├── infrastructure/                    # DevOps & deployment
+│   ├── docker/                       # Container configurations
+│   ├── kubernetes/                   # K8s manifests
+│   ├── ci-cd/                        # CI/CD pipelines
+│   ├── monitoring/                   # Observability stack
+│   └── terraform/                    # Infrastructure as code
+│
+├── scripts/                          # Automation scripts
+├── docs/                             # Documentation
+└── tests/                            # System-wide tests
 ```
 
 ---
