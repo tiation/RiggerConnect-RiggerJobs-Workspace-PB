@@ -89,7 +89,7 @@ tiation-rigger-workspace/
 
 ### **1. Clone and Setup**
 ```bash
-git clone https://github.com/tiation/tiation-rigger-workspace.git
+# Already at /Users/tiaastor/tiation-rigger-workspace
 cd tiation-rigger-workspace
 pnpm install
 ```

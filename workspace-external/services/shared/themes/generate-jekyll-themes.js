@@ -13,49 +13,49 @@ const themeConfig = require('./tiation-rigger-theme.json');
 const componentSites = [
   {
     name: 'jobs-app',
-    path: '../../tiation-rigger-workspace/components/jobs-app/_config.yml',
+    path: '/Users/tiaastor/tiation-rigger-workspace/components/jobs-app/_config.yml',
     title: 'tiation-rigger-jobs-app',
     description: 'Enterprise-grade job matching platform in the Tiation Rigger ecosystem'
   },
   {
     name: 'connect-app',
-    path: '../../tiation-rigger-workspace/components/connect-app/_config.yml',
+    path: '/Users/tiaastor/tiation-rigger-workspace/components/connect-app/_config.yml',
     title: 'tiation-rigger-connect-app',
     description: 'Professional networking platform for rigging and construction industry'
   },
   {
     name: 'mobile-app',
-    path: '../../tiation-rigger-workspace/components/mobile-app/_config.yml',
+    path: '/Users/tiaastor/tiation-rigger-workspace/components/mobile-app/_config.yml',
     title: 'tiation-rigger-mobile-app',
     description: 'Mobile application suite for riggers and construction professionals'
   },
   {
     name: 'automation-server',
-    path: '../../tiation-rigger-workspace/components/automation-server/_config.yml',
+    path: '/Users/tiaastor/tiation-rigger-workspace/components/automation-server/_config.yml',
     title: 'tiation-rigger-automation-server',
     description: 'AI-powered automation and analytics platform'
   },
   {
     name: 'metrics-dashboard',
-    path: '../../tiation-rigger-workspace/components/metrics-dashboard/_config.yml',
+    path: '/Users/tiaastor/tiation-rigger-workspace/components/metrics-dashboard/_config.yml',
     title: 'tiation-rigger-metrics-dashboard',
     description: 'Business intelligence and performance metrics platform'
   },
   {
     name: 'infrastructure',
-    path: '../../tiation-rigger-workspace/components/infrastructure/_config.yml',
+    path: '/Users/tiaastor/tiation-rigger-workspace/components/infrastructure/_config.yml',
     title: 'tiation-rigger-infrastructure',
     description: 'Cloud infrastructure and deployment automation tools'
   },
   {
     name: 'shared-libraries',
-    path: '../../tiation-rigger-workspace/components/shared-libraries/_config.yml',
+    path: '/Users/tiaastor/tiation-rigger-workspace/components/shared-libraries/_config.yml',
     title: 'tiation-rigger-shared-libraries',
     description: 'Reusable components and utilities for the Rigger ecosystem'
   },
   {
     name: 'workspace-docs',
-    path: '../../tiation-rigger-workspace/components/workspace-docs/_config.yml',
+    path: '/Users/tiaastor/tiation-rigger-workspace/components/workspace-docs/_config.yml',
     title: 'Tiation Rigger Workspace Documentation',
     description: 'Comprehensive documentation for the Rigger development platform'
   }

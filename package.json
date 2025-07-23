@@ -51,10 +51,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tiation/tiation-rigger-workspace.git"
+"url": "/Users/tiaastor/tiation-rigger-workspace"
   },
   "bugs": {
-    "url": "https://github.com/tiation/tiation-rigger-workspace/issues"
+"url": "/Users/tiaastor/tiation-rigger-workspace/issues"
   },
   "homepage": "https://riggerhub.com.au",
   "devDependencies": {
